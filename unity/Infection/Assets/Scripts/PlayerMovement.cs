@@ -65,11 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         input = Vector2.zero;
 
-        if (isSimulated)
-        {
-            input = simulatedInput;
-        }
-        else if (isRecoiling)
+        if (isRecoiling)
         {
             input = recoilDir;
             Recoil(input);
@@ -77,7 +73,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (canMove)
+            if (isSimulated)
+            {
+                input = simulatedInput;
+            }
+            else if (canMove)
             {
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -173,5 +173,16 @@ public class PlayerMovement : MonoBehaviour
         isRecoiling = true;
         recoilDir = speed * (isFacingRight ? Vector3.right : Vector3.left);
         recoilTrack = Time.time + dashTime;
+    }
+
+    public void SimulateInput(Vector2 i)
+    {
+        isSimulated = true;
+        simulatedInput = i;
+    }
+
+    public void StopSimulateInput()
+    {
+        isSimulated = false;
     }
 }
