@@ -4,185 +4,92 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Movement
 {
-    public float speed = 5;
-    public float airControlSpeed;
-    public float jumpSpeed = 5;
-    Vector2 input;
-    Vector2 simulatedInput;
-    Rigidbody rBody;
-
-    public float fallMult = 2.5f;
-    public float lowJumpMult = 2.0f;
-
-    public bool isGrounded = false;
-    public bool wasGrounded;
-    public LayerMask groundLayer;
-    public float collisionRadius = 1;
-    public Transform bottomOffset;
-    public bool isFacingRight = true;
-    public float jumpHoldTime = 1;
-    float jumpHoldTimeTrack;
-    bool holdingJump = true;
-
-    public float coyoteTime = 0.1f;
-    public float coyoteTimeTrack;
     public static PlayerMovement instance;
-
-    public float recoilTime = 0.5f;
-    float recoilTrack;
-    bool isRecoiling;
-    bool isSimulated;
-    Vector2 recoilDir;
-
-    //public Animator anim;
-    //public ParticleSystem dust;
-    public float timeScale = 1;
-    public float TimeScale { get => Time.deltaTime * timeScale; }
-
-    public bool canMove = true;
+    public float fastFallMult = 2.5f;
+    bool fastFall;
+    public Attack meleeAttack;
+    public Attack ariealAttack;
+    public ClawAttack clawAttack;
+    public int maxJumps = 1;
+    int jumpTrack = 0;
     private void Awake()
     {
         instance = this;
     }
-    // Start is called before the first frame update
-    void Start()
+    public override void OnGrounded()
     {
-        rBody = GetComponent<Rigidbody>();
+        base.OnGrounded();
+        fastFall = false;
+        jumpTrack = maxJumps;
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void DetermineInput()
     {
-        wasGrounded = isGrounded;
-        isGrounded = Physics.OverlapSphere(bottomOffset.position, collisionRadius, groundLayer).Length > 0;
-        //anim.SetBool("isGrounded", isGrounded);
-        if (wasGrounded && !isGrounded)
-        {
-            coyoteTimeTrack = Time.time + coyoteTime;
-        }
-
         input = Vector2.zero;
-
-        if (isRecoiling)
+        if (!isSimulated && !isRecoiling && !IsAttacking())
         {
-            input = recoilDir;
-            Recoil(input);
-            if (Time.time > recoilTrack) isRecoiling = false;
+            if (Input.GetKey(KeyCode.A))
+            {
+                input.x -= 1;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                input.x += 1;
+            }
         }
         else
+            base.DetermineInput();
+    }
+    public override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (!IsAttacking())
         {
-            if (isSimulated)
+            if (isGrounded && Input.GetKeyDown(meleeAttack.key))
             {
-                input = simulatedInput;
+                meleeAttack.StartAttack();
             }
-            else if (canMove)
+            else if (!isGrounded && Input.GetKeyDown(ariealAttack.key))
             {
-                if (Input.GetKey(KeyCode.A))
-                {
-                    input.x -= 1;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    input.x += 1;
-                }
+                ariealAttack.StartAttack();
             }
-            if (input.x > 0 && !isFacingRight)
-                FaceDirection(true);
-            else if (input.x < 0 && isFacingRight)
-                FaceDirection(false);
-
-
-            Walk(input);
-
+            else if (Input.GetKeyDown(clawAttack.key))
+            {
+                clawAttack.StartAttack();
+            }
+            else if ((isGrounded || Time.time < coyoteTimeTrack) && Input.GetKeyDown(KeyCode.Space))
+                Jump();
         }
-
-        if (!isGrounded)
-        {
-            holdingJump = jumpHoldTimeTrack > 0 && Input.GetKey(KeyCode.Space);
-            jumpHoldTimeTrack -= TimeScale;
-
-            if (rBody.velocity.y < 0)
-            {
-                rBody.velocity += Vector3.up * Physics.gravity.y * (fallMult - 1) * TimeScale;
-            }
-            else if (rBody.velocity.y > 0 && !holdingJump)
-            {
-                jumpHoldTimeTrack -= TimeScale;
-                rBody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMult - 1) * TimeScale;
-            }
-        }
-        if ((isGrounded || Time.time < coyoteTimeTrack) && Input.GetKeyDown(KeyCode.Space))
-            Jump();
-        //anim.SetFloat("velocityY", rBody.velocity.y);
-        SetDustEmmision();
     }
-    public void Walk(Vector2 i)
+    public override bool ShouldJump()
     {
-        //anim.SetBool("Walk", (i.x != 0));
-        i *= speed;
-        rBody.velocity = new Vector2(i.x, rBody.velocity.y);
+        bool canJump = jumpTrack > 0 || Time.time < coyoteTimeTrack;
+        canJump = canJump && Input.GetKeyDown(KeyCode.Space);
+        canJump = canJump && !IsAttacking() && !isRecoiling;
+        return canJump;
     }
-    public void Recoil(Vector2 i)
+    public override bool IsHoldingJump()
     {
-        i *= speed;
-        rBody.velocity = new Vector2(i.x, 0);
+        return jumpHoldTimeTrack > 0 && Input.GetKey(KeyCode.Space);
     }
-    void FaceDirection(bool right)
+    public override void OnFallingDown()
     {
-        isFacingRight = right;
-        transform.localEulerAngles = new Vector3(0, right ? 0 : 180, 0);
-    }
-    void SetDustEmmision()
-    {
-        //EmissionModule em = dust.emission;
-        //em.enabled = isGrounded && Mathf.Abs(input.x) > 0;
-    }
-
-    public void Jump()
-    {
-        jumpHoldTimeTrack = jumpHoldTime;
-        rBody.velocity = new Vector2(rBody.velocity.x, 0);
-        rBody.velocity += Vector3.up * jumpSpeed;
-        //anim.SetTrigger("Jump");
-        //anim.SetBool("isGrounded", false);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawSphere(bottomOffset.position, collisionRadius);
-    }
-
-    public void HitPlayer(Transform source)
-    {
-        isRecoiling = true;
-        Vector3 result;
-        if (source.position.x > transform.position.x)
-            result = Vector3.left;
+        if (Input.GetKey(KeyCode.S))
+            fastFall = true;
+        if (fastFall)
+            rBody.velocity += Vector3.up * Physics.gravity.y * (fastFallMult - 1) * Time.deltaTime;
         else
-            result = Vector3.right;
-
-        recoilDir = result;
-        recoilTrack = Time.time + recoilTime;
+            base.OnFallingDown();
     }
 
-    public void Dash(float dashTime, float speed)
+    public override bool IsAttacking()
     {
-        if (isRecoiling) return;
-        isRecoiling = true;
-        recoilDir = speed * (isFacingRight ? Vector3.right : Vector3.left);
-        recoilTrack = Time.time + dashTime;
+        return meleeAttack.IsAttacking || ariealAttack.IsAttacking || clawAttack.IsAttacking;
     }
-
-    public void SimulateInput(Vector2 i)
+    public override void Jump()
     {
-        isSimulated = true;
-        simulatedInput = i;
-    }
-
-    public void StopSimulateInput()
-    {
-        isSimulated = false;
+        base.Jump();
+        jumpTrack--;
     }
 }

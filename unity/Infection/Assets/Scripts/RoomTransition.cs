@@ -26,6 +26,7 @@ public class RoomTransition : MonoBehaviour
     }
     void StartTransitionExit(PlayerMovement pm)
     {
+        if (pm == null) return;
         Vector2 dir = exitEndPoint.position - exitStartPoint.position;
         dir.Normalize();
         //Disable player controls

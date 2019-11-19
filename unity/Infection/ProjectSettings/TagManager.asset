@@ -17,9 +17,9 @@ TagManager:
   - CameraBounds
   - AreaTransition
   - Player
-  - 
-  - 
-  - 
+  - HitBox
+  - HurtBox
+  - ClawScanner
   - 
   - 
   - 

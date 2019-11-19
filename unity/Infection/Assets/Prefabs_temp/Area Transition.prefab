@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5867152610258938863}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: exitEnd
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5867152610262151709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: entryEnd
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 5867152611300129071}
   - component: {fileID: 5867152611300129068}
   - component: {fileID: 5867152611300129069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Area Transition
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
