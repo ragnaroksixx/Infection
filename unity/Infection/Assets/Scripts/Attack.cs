@@ -26,6 +26,7 @@ public class Attack : MonoBehaviour
     AttackState state;
     protected Movement self;
     public float stunTime = 0.1f;
+    public float stunTimeZero = 0.1f;
     public bool IsAttacking
     {
         get
@@ -109,12 +110,13 @@ public class Attack : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Movement m = other.GetComponentInParent<Movement>();
-        if (m && m != self && !m.isRecoiling)
+        if (m is PlayerMovement && m.isRecoiling) return;
+        if (m && m != self)
         {
             Vector3 result = localDirection;
             if (!self.isFacingRight)
                 result.x *= -1;
-            m.HitCharacter(result, stunTime);
+            m.HitCharacter(result, stunTime, stunTimeZero);
         }
 
     }
