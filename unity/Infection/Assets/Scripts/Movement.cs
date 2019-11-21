@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
     public bool isGrounded = false;
     public bool wasGrounded;
     public LayerMask groundLayer;
-    public float collisionRadius = 1;
+    protected float collisionRadius = .2f;
     public Transform bottomOffset;
     public bool isFacingRight = true;
     public float jumpHoldTime = 1;
@@ -36,6 +36,7 @@ public class Movement : MonoBehaviour
     public float coyoteTime = 0.1f;
     public float coyoteTimeTrack;
     float recoilTrack;
+    float zeroRecoilTrack;
     public bool isRecoiling;
     protected bool isSimulated;
     Vector2 recoilDir;
@@ -52,7 +53,12 @@ public class Movement : MonoBehaviour
     {
         input = Vector2.zero;
         if (isRecoiling)
-            input = recoilDir;
+        {
+            if (Time.time > recoilTrack)
+                input = Vector2.zero;
+            else
+                input = recoilDir;
+        }
         else
         {
             if (isSimulated)
@@ -78,7 +84,10 @@ public class Movement : MonoBehaviour
 
         if (isRecoiling)
         {
-            if (Time.time > recoilTrack) isRecoiling = false;
+            if (Time.time > zeroRecoilTrack)
+            {
+                isRecoiling = false;
+            }
             SetVelocity(input, 1, false);
         }
         else
@@ -164,16 +173,17 @@ public class Movement : MonoBehaviour
         rBody.velocity += Vector3.up * jumpSpeed;
     }
 
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(bottomOffset.position, collisionRadius);
     }
 
-    public virtual void HitCharacter(Vector3 dir, float stunTime)
+    public virtual void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime)
     {
         isRecoiling = true;
         recoilDir = dir;
         recoilTrack = Time.time + stunTime;
+        zeroRecoilTrack = recoilTrack + zeroVelocityTime;
     }
 
     public void SimulateInput(Vector2 i)

@@ -25,7 +25,7 @@ public class ClawAttack : Attack
     public override void OnAttackStartUp()
     {
         //base.OnAttackStartUp();
-        target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration);
+        target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration, 0);
 
         Vector3 targetPos = target.transform.position;
         Vector3 targetRotFwd = target.transform.position - clawRoot.transform.position;
@@ -48,7 +48,7 @@ public class ClawAttack : Attack
         Vector3 targetRotFwd = target.transform.position - pullTargetPos;
         targetRotFwd.Normalize();
         targetRotFwd *= -pullSpeed;
-        target.HitCharacter(targetRotFwd, pullDuration);
+        target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero);
     }
     public override void EndAttack()
     {
