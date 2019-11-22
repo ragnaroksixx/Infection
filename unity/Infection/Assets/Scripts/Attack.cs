@@ -27,6 +27,8 @@ public class Attack : MonoBehaviour
     protected Movement self;
     public float stunTime = 0.1f;
     public float stunTimeZero = 0.1f;
+    public bool isGroundAttack = true;
+    public bool isAirAttack = false;
     public bool IsAttacking
     {
         get
@@ -49,7 +51,7 @@ public class Attack : MonoBehaviour
     {
 
     }
-    public void StartAttack()
+    public virtual void StartAttack()
     {
         doNextCombo = false;
         hitbox.gameObject.SetActive(true);

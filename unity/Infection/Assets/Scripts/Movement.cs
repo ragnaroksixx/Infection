@@ -15,7 +15,8 @@ public class Movement : MonoBehaviour
     }
     public float speed = 5;
     public float jumpSpeed = 5;
-    protected Vector2 input;
+    [HideInInspector]
+    public Vector2 input;
     Vector2 simulatedInput;
     protected Rigidbody rBody;
 
@@ -38,12 +39,23 @@ public class Movement : MonoBehaviour
     float recoilTrack;
     float zeroRecoilTrack;
     public bool isRecoiling;
-    protected bool isSimulated;
+    private bool isSimulated;
     Vector2 recoilDir;
     public float drag = 1;
+    public Animator anim;
+    bool fastFall;
+    public float fastFallMult = 8f;
+    public bool IsSimulated { get => isSimulated; set => isSimulated = value; }
+    public float CollisionRadius { get => collisionRadius; set => collisionRadius = value; }
+
+    public InputController controller;
+    public int maxJumps = 1;
+    int jumpTrack = 0;
     public virtual void Start()
     {
         rBody = GetComponent<Rigidbody>();
+        jumpTrack = maxJumps;
+        //anim = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -61,13 +73,14 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            if (isSimulated)
+            if (IsSimulated)
             {
                 input = simulatedInput;
             }
             else
             {
-
+                if (controller)
+                    controller.SetInput();
             }
         }
     }
@@ -79,6 +92,8 @@ public class Movement : MonoBehaviour
         {
             OnGrounded();
         }
+        if (anim)
+            anim.SetBool("isGrounded", isGrounded);
 
         DetermineInput();
 
@@ -97,6 +112,8 @@ public class Movement : MonoBehaviour
             else if (input.x < 0 && isFacingRight)
                 FaceDirection(false);
             SetVelocity(input, speed, true);
+            if (anim)
+                anim.SetBool("isRunning", Mathf.Abs(input.x) > 0);
         }
 
 
@@ -118,23 +135,40 @@ public class Movement : MonoBehaviour
 
         if (ShouldJump())
             Jump();
+        else if (controller)
+            controller.SetAttacks();
+
+    }
+    public virtual void SetController(InputController ic)
+    {
+        controller = ic;
     }
     public virtual bool IsHoldingJump()
     {
-        return false;
+        return jumpHoldTimeTrack > 0;
     }
 
     public virtual bool ShouldJump()
     {
-        return false;
+        bool canJump = jumpTrack > 0 || Time.time < coyoteTimeTrack;
+        canJump = canJump && (controller && controller.Jump());
+        canJump = canJump && !IsAttacking() && !isRecoiling;
+        return canJump;
     }
     public virtual void OnFallingDown()
     {
-        rBody.velocity += Vector3.up * Physics.gravity.y * (fallMult - 1) * Time.deltaTime;
+        if (controller && controller.IsFastFall())
+            fastFall = true;
+        if (fastFall)
+            rBody.velocity += Vector3.up * Physics.gravity.y * (fastFallMult - 1) * Time.deltaTime;
+        else
+            rBody.velocity += Vector3.up * Physics.gravity.y * (fallMult - 1) * Time.deltaTime;
     }
     public virtual void OnGrounded()
     {
         coyoteTimeTrack = Time.time + coyoteTime;
+        fastFall = false;
+        jumpTrack = maxJumps;
     }
 
     public void SetVelocity(Vector2 i, float spd, bool ignoreY)
@@ -171,6 +205,9 @@ public class Movement : MonoBehaviour
         jumpHoldTimeTrack = jumpHoldTime;
         rBody.velocity = new Vector2(rBody.velocity.x, 0);
         rBody.velocity += Vector3.up * jumpSpeed;
+        jumpTrack--;
+        if (anim)
+            anim.SetTrigger("jump");
     }
 
     public virtual void OnDrawGizmosSelected()
@@ -188,13 +225,13 @@ public class Movement : MonoBehaviour
 
     public void SimulateInput(Vector2 i)
     {
-        isSimulated = true;
+        IsSimulated = true;
         simulatedInput = i;
     }
 
     public void StopSimulateInput()
     {
-        isSimulated = false;
+        IsSimulated = false;
     }
 
     public virtual bool IsAttacking()
