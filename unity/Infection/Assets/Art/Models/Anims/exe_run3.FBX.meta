@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 638efbd57755bc84c8feb1f9c0ee0355
+guid: 0a9fcea4dd2b23c4ea6613a9bb1fa0e8
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -31,7 +31,49 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - exe_body
+    - Char_Root
+    - Helper_Torso
+    - Helper_Torso/Bone_Torso
+    - Helper_Torso/Bone_Torso/Bone_Head
+    - Helper_Torso/Bone_Torso/Bone_Head/Bone_Head_Root
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_R
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_R/Bone_Arm_Upper_R
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword/Bone_Sword_Root
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3/Bone_Thumb4
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3/Bone_Finger4
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7
+    - Helper_Torso/Bone_Torso/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7/Bone_Finger8
+    - Helper_Torso/Bone_Torso/Bone_Hip_R
+    - Helper_Torso/Bone_Torso/Bone_Hip_R/Bone_Leg_Upper_R
+    - Helper_Torso/Bone_Torso/Bone_Hip_R/Bone_Leg_Upper_R/Bone_Leg_Lower_R
+    - Helper_Torso/Bone_Torso/Bone_Hip_R/Bone_Leg_Upper_R/Bone_Leg_Lower_R/Bone_Leg_Root_R
+    - Helper_Torso/Bone_Torso/Bone_Hip_L
+    - Helper_Torso/Bone_Torso/Bone_Hip_L/Bone_Leg_Upper_L
+    - Helper_Torso/Bone_Torso/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L
+    - Helper_Torso/Bone_Torso/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L/Bone_Leg_Root_L
+    - Helper_Sword
+    - Helper_Sword/IK_Sword
+    - Helper_Arm_L
+    - Helper_Arm_L/IK_Arm_L
+    - Helper_Leg_R
+    - Helper_Leg_R/IK_Leg_R
+    - Helper_Leg_L
+    - Helper_Leg_L/IK_Leg_L
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
@@ -80,7 +122,7 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
@@ -113,7 +155,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.02
+    globalScale: 2
     rootMotionBoneName: Char_Root
     hasTranslationDoF: 0
     hasExtraRoot: 0

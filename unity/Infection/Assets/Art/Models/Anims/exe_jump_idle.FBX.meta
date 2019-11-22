@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 86be035758845e54a8ca571cce4eff5d
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: exe_jump_idle
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths:
+    - exe_body
+    - Char_Root
+    - Char_Root/Helper_Torso
+    - Char_Root/Helper_Torso/Bone_Chest
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L/Bone_Leg_L_Root
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R/Bone_Leg_Lower_R
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R/Bone_Leg_Lower_R/Bone_Leg_R_Root
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3/Bone_Thumb4
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3/Bone_Finger4
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7/Bone_Finger8
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword/Bone_Sword_Root
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Head
+    - Char_Root/Helper_Torso/Bone_Chest/Bone_Head/Bone_Head_Root
+    - Helper_Sword
+    - Helper_Sword/IK_Shield
+    - Helper_Leg_R
+    - Helper_Leg_R/IK_Leg_R
+    - Helper_Leg_L
+    - Helper_Leg_L/IK_Leg_L
+    - Helper_Arm_L
+    - Helper_Arm_L/IK_Wrist_L
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: exe_jump_idle
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 22
+      lastFrame: 46
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 2
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 2
+    rootMotionBoneName: Char_Root
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
