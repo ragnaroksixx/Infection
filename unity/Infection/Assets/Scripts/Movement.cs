@@ -257,5 +257,16 @@ public class Movement : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    public void FreezeRBody()
+    {
+        rBody.useGravity = false;
+        rBody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void UnFreezeRBody()
+    {
+        rBody.useGravity = true;
+        rBody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezeRotationZ;
+    }
 }
 

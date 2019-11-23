@@ -55,14 +55,12 @@ public class PlayerMovement : Movement
     public void Hide()
     {
         graphic.gameObject.SetActive(false);
-        rBody.useGravity = false;
-        rBody.constraints = RigidbodyConstraints.FreezeAll;
+        FreezeRBody();
     }
 
     public void Show()
     {
         graphic.gameObject.SetActive(true);
-        rBody.useGravity = true;
-        rBody.constraints = RigidbodyConstraints.FreezeRotation;
+        UnFreezeRBody();
     }
 }

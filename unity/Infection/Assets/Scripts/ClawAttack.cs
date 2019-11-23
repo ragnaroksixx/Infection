@@ -37,12 +37,15 @@ public class ClawAttack : Attack
         else
         {
             target = AutoTarget(grabRange);
-            if(target)
+            if (target)
             {
                 Grab(target);
             }
-            target = AutoTarget(range);
-            base.StartAttack();
+            else
+            {
+                target = AutoTarget(range);
+                base.StartAttack();
+            }
         }
     }
     public override void OnAttackStartUp()
@@ -78,6 +81,15 @@ public class ClawAttack : Attack
     {
         base.OnAttack();
 
+    }
+    public override void OnEndLagUpdate()
+    {
+        base.OnEndLagUpdate();
+        if (CanTarget(target, grabRange) && Input.GetKey(key))
+        {
+            EndAttack();
+            Grab(target);
+        }
     }
     public override void OnEndLagStart()
     {
@@ -115,44 +127,57 @@ public class ClawAttack : Attack
             Movement m = col.GetComponentInParent<Movement>();
             if (m == null || m == self) continue;
             float dist = Vector3.Distance(m.transform.position, self.transform.position);
-            if (dist <= closest && dist < r)
+            if (dist <= closest)
             {
-                if (self.isFacingRight)
+                if (CanTarget(m, r))
                 {
-                    if (m.transform.position.x <= self.transform.position.x)
-                        continue;
+                    result = m;
+                    closest = dist;
                 }
-                else
-                {
-                    if (m.transform.position.x >= self.transform.position.x)
-                        continue;
-                }
-                if (Physics.Raycast(claw.transform.position, m.transform.position - claw.transform.position, dist * .9f, groundLayer))
-                    continue;
-                result = m;
-                closest = dist;
             }
         }
         return result;
     }
+    public bool CanTarget(Movement m, float r)
+    {
+        float dist = Vector3.Distance(m.transform.position, self.transform.position);
+        if (dist > r) return false;
 
+        if (self.isFacingRight)
+        {
+            if (m.transform.position.x <= self.transform.position.x)
+                return false;
+        }
+        else
+        {
+            if (m.transform.position.x >= self.transform.position.x)
+                return false;
+        }
+        if (Physics.Raycast(claw.transform.position, m.transform.position - claw.transform.position, dist * .9f, groundLayer))
+            return false;
+
+        return true;
+
+    }
     public void Grab(Movement m)
     {
         PlayerInputController.instance.HoldingObject = m;
+        m.FreezeRBody();
         m.SimulateInput(Vector2.zero);
         m.transform.SetParent(holdPoint);
         m.transform.localPosition = Vector3.zero;
-        //m.transform.localRotation = Quaternion.identity;
+        m.transform.localRotation = Quaternion.identity;
     }
 
     public void Throw(Movement m)
     {
         PlayerInputController.instance.HoldingObject = null;
-        Vector3 throwVelocity = new Vector3(1, 1);
+        m.UnFreezeRBody();
+        Vector3 throwVelocity = new Vector3(9, 9);
         if (!self.isFacingRight)
             throwVelocity.x *= -1;
         m.transform.SetParent(null);
-        m.HitCharacter(throwVelocity, 0.1f, 0.5f, 0);
+        m.HitCharacter(throwVelocity, .251f, 3f, 0);
     }
     public override bool CanAttack()
     {

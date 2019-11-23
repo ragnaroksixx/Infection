@@ -1936,7 +1936,7 @@ MonoBehaviour:
   coyoteTime: 0.1
   coyoteTimeTrack: 0
   isRecoiling: 0
-  drag: 8
+  drag: 3
   anim: {fileID: 0}
   fastFallMult: 8
   controller: {fileID: 985080089}
@@ -2028,7 +2028,7 @@ Transform:
   - {fileID: 1632257411}
   - {fileID: 700936194}
   m_Father: {fileID: 1673111738}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1051986316
 MeshFilter:
@@ -2122,7 +2122,7 @@ Transform:
   - {fileID: 163154498}
   - {fileID: 146283127}
   m_Father: {fileID: 1673111738}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468206849
 GameObject:
@@ -7800,6 +7800,36 @@ Transform:
   m_Father: {fileID: 710977934}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1548494767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548494768}
+  m_Layer: 11
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1548494768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548494767}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1673111738}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1560963327
 GameObject:
   m_ObjectHideFlags: 0
@@ -8025,7 +8055,7 @@ MonoBehaviour:
   localDirection: {x: 0, y: 0}
   hitbox: {fileID: 871279025}
   mesh: {fileID: 370135524}
-  nextAttack: {fileID: 0}
+  nextAttack: {fileID: 245799283}
   key: 324
   stunTime: 0.1
   stunTimeZero: 0.2
@@ -8038,14 +8068,14 @@ MonoBehaviour:
   pullDuration: 0.5
   pullEndPointOffset: 2
   range: 12
-  grabRange: 0
+  grabRange: 3.5
   targetLayers:
     serializedVersion: 2
     m_Bits: 8192
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  holdPoint: {fileID: 0}
+  holdPoint: {fileID: 1548494768}
 --- !u!1 &1673111734
 GameObject:
   m_ObjectHideFlags: 0
@@ -8092,6 +8122,7 @@ Transform:
   m_Children:
   - {fileID: 1829628299}
   - {fileID: 357001120}
+  - {fileID: 1548494768}
   - {fileID: 1051986315}
   - {fileID: 1168049516}
   - {fileID: 1924048185}
@@ -8200,7 +8231,7 @@ MonoBehaviour:
   coyoteTime: 0.1
   coyoteTimeTrack: 0
   isRecoiling: 0
-  drag: 8
+  drag: 3
   anim: {fileID: 0}
   fastFallMult: 8
   controller: {fileID: 0}
@@ -8373,7 +8404,7 @@ Transform:
   m_Children:
   - {fileID: 607228100}
   m_Father: {fileID: 1673111738}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1945678662
 Mesh:
@@ -8381,7 +8412,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24688
+  m_Name: pb_Mesh16972
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
