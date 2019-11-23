@@ -18,7 +18,6 @@ public class PlayerMovement : Movement
         base.SetController(ic);
         if (ic)
         {
-            ic.AddAttacks(meleeAttack, ariealAttack, clawAttack, corruptAttack);
             Show();
         }
         else
@@ -34,6 +33,7 @@ public class PlayerMovement : Movement
     {
         base.Awake();
         instance = this;
+        SetAttacks(meleeAttack, ariealAttack, clawAttack, corruptAttack);
     }
     public override void Update()
     {
@@ -42,9 +42,9 @@ public class PlayerMovement : Movement
     }
     private void FixedUpdate()
     {
-        if (controller == null)
+        if (PlayerInputController.instance.IsCorrupting)
         {
-            transform.position = PlayerInputController.instance.movement.transform.position;
+            transform.position = PlayerInputController.instance.CorruptingEnemy.transform.position;
         }
     }
     public override bool IsAttacking()

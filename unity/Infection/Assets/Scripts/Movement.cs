@@ -47,13 +47,23 @@ public class Movement : MonoBehaviour
     public float fastFallMult = 8f;
     public bool IsSimulated { get => isSimulated; set => isSimulated = value; }
     public float CollisionRadius { get => collisionRadius; set => collisionRadius = value; }
+    public Health Health { get => health; set => health = value; }
 
     public InputController controller;
     public int maxJumps = 1;
     int jumpTrack = 0;
+    [HideInInspector]
+    public Attack[] attacks;
+    public int maxHP;
+    Health health;
+    public void SetAttacks(params Attack[] atks)
+    {
+        attacks = atks;
+    }
     public virtual void Awake()
     {
         rBody = GetComponent<Rigidbody>();
+        health = new Health(maxHP);
     }
     public virtual void Start()
     {
@@ -83,7 +93,7 @@ public class Movement : MonoBehaviour
             else
             {
                 if (controller)
-                    controller.SetInput();
+                    controller.SetInput(this);
             }
         }
     }
@@ -139,14 +149,12 @@ public class Movement : MonoBehaviour
         if (ShouldJump())
             Jump();
         else if (controller)
-            controller.SetAttacks();
+            controller.SetAttacks(this);
 
     }
     public virtual void SetController(InputController ic)
     {
         controller = ic;
-        if (controller)
-            controller.AddAttacks(new Attack[0]);
     }
     public virtual bool IsHoldingJump()
     {
@@ -156,13 +164,13 @@ public class Movement : MonoBehaviour
     public virtual bool ShouldJump()
     {
         bool canJump = jumpTrack > 0 || Time.time < coyoteTimeTrack;
-        canJump = canJump && (controller && controller.Jump());
+        canJump = canJump && (controller && controller.Jump(this));
         canJump = canJump && !IsAttacking() && !isRecoiling;
         return canJump;
     }
     public virtual void OnFallingDown()
     {
-        if (controller && controller.IsFastFall())
+        if (controller && controller.IsFastFall(this))
             fastFall = true;
         if (fastFall)
             rBody.velocity += Vector3.up * Physics.gravity.y * (fastFallMult - 1) * Time.deltaTime;
@@ -220,12 +228,13 @@ public class Movement : MonoBehaviour
         Gizmos.DrawSphere(bottomOffset.position, collisionRadius);
     }
 
-    public virtual void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime)
+    public virtual void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime, int damage)
     {
         isRecoiling = true;
         recoilDir = dir;
         recoilTrack = Time.time + stunTime;
         zeroRecoilTrack = recoilTrack + zeroVelocityTime;
+        health.LoseHP(damage);
     }
 
     public void SimulateInput(Vector2 i)
@@ -242,6 +251,11 @@ public class Movement : MonoBehaviour
     public virtual bool IsAttacking()
     {
         return false;
+    }
+
+    public virtual void Die()
+    {
+        Destroy(this.gameObject);
     }
 }
 

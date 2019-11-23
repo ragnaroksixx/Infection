@@ -5,16 +5,21 @@ using DG.Tweening;
 
 public class CorruptAttack : Attack
 {
-    public bool isCorrupting = false;
+
     public InputController playerController;
     public override void ApplyAttackEffects(Movement target)
     {
-        if (isCorrupting) return;
+        if (PlayerInputController.instance.IsCorrupting) return;
         //base.ApplyAttackEffects(target);
-        isCorrupting = true;
+        PlayerInputController.instance.OnCorrupt(target);
         self.SetController(null);
-        playerController.SetMovement(target);
+        target.SetController(playerController);
+        target.isRecoiling = false;
         //Room.SetCameraTarget(target.transform);
+    }
+    public override bool CanAttack()
+    {
+        return base.CanAttack() && !PlayerInputController.instance.IsHoldingObject;
     }
 }
 

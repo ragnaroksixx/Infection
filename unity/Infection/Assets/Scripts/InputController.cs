@@ -6,49 +6,33 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public Movement movement;
-    protected Attack[] attacks;
 
-    public virtual void Awake()
-    {
-        attacks = new Attack[0];
-
-    }
-    private void Start()
-    {
-        SetMovement(movement);
-    }
-    public void SetMovement(Movement m)
-    {
-        movement = m;
-        if (movement)
-            movement.SetController(this);
-    }
-    public virtual void SetInput()
+    public virtual void Update()
     {
 
     }
 
-    public virtual void SetAttacks()
+    public virtual void SetInput(Movement m)
     {
 
     }
-    public void AddAttacks(params Attack[] atks)
+
+    public virtual void SetAttacks(Movement m)
     {
-        attacks = atks;
+
     }
 
-    public virtual bool IsHoldingJump()
+    public virtual bool IsHoldingJump(Movement m)
     {
         return false;
     }
 
-    public virtual bool IsFastFall()
+    public virtual bool IsFastFall(Movement m)
     {
         return false;
     }
 
-    public virtual bool Jump()
+    public virtual bool Jump(Movement m)
     {
         return false;
     }

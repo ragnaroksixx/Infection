@@ -18,6 +18,8 @@ public class ClawAttack : Attack
     public float range;
     public LayerMask targetLayers;
     public LayerMask groundLayer;
+    public Transform holdPoint;
+
     public override void Start()
     {
         clawToTargetDuration = startUpLag;
@@ -27,8 +29,15 @@ public class ClawAttack : Attack
     }
     public override void StartAttack()
     {
-        target = AutoTarget();
-        base.StartAttack();
+        if (PlayerInputController.instance.IsHoldingObject)
+        {
+            Throw(PlayerInputController.instance.HoldingObject);
+        }
+        else
+        {
+            target = AutoTarget();
+            base.StartAttack();
+        }
     }
     public override void OnAttackStartUp()
     {
@@ -37,7 +46,7 @@ public class ClawAttack : Attack
         Vector3 targetRotFwd;
         if (target)
         {
-            target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration, 0);
+            target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration, 0, 0);
             targetPos = target.transform.position;
             targetRotFwd = target.transform.position - clawRoot.transform.position;
         }
@@ -74,7 +83,7 @@ public class ClawAttack : Attack
             Vector3 targetRotFwd = target.transform.position - pullTargetPos;
             targetRotFwd.Normalize();
             targetRotFwd *= -pullSpeed;
-            target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero);
+            target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero, 0);
         }
     }
     public override void EndAttack()
@@ -119,5 +128,28 @@ public class ClawAttack : Attack
             }
         }
         return result;
+    }
+
+    public void Grab(Movement m)
+    {
+        PlayerInputController.instance.HoldingObject = m;
+        m.SimulateInput(Vector2.zero);
+        m.transform.SetParent(holdPoint);
+        m.transform.localPosition = Vector3.zero;
+        //m.transform.localRotation = Quaternion.identity;
+    }
+
+    public void Throw(Movement m)
+    {
+        PlayerInputController.instance.HoldingObject = null;
+        Vector3 throwVelocity = new Vector3(1, 1);
+        if (!self.isFacingRight)
+            throwVelocity.x *= -1;
+        m.transform.SetParent(null);
+        m.HitCharacter(throwVelocity, 0.1f, 0.5f, 0);
+    }
+    public override bool CanAttack()
+    {
+        return base.CanAttack();// && !PlayerInputController.instance.IsHoldingObject;
     }
 }

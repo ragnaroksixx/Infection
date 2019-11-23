@@ -16,14 +16,13 @@ public class PointToPointEnemy : EnemyMovement
     public bool ignoreY = true;
     public void OnDrawGizmosSelected()
     {
-        if (movement == null) return;
-        Gizmos.DrawSphere(PointA, movement.CollisionRadius);
-        Gizmos.DrawSphere(PointB, movement.CollisionRadius);
+        Gizmos.DrawSphere(PointA, 0.2f);
+        Gizmos.DrawSphere(PointB, 0.2f);
     }
-    public override void SetInput()
+    public override void SetInput(Movement m)
     {
-        base.SetInput();
-        if (!movement.IsSimulated && !movement.isRecoiling && !movement.IsAttacking() && movement.isGrounded)
+        base.SetInput(m);
+        if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && m.isGrounded)
         {
             Vector3 delta = Target - transform.position;
             if (ignoreY)
@@ -33,7 +32,7 @@ public class PointToPointEnemy : EnemyMovement
                 targetingA = !targetingA;
             else
             {
-                movement.input = delta.normalized;
+                m.input = delta.normalized;
             }
 
         }

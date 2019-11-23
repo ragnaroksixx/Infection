@@ -18,15 +18,16 @@ public class EnemyHitbox : MonoBehaviour
         PlayerMovement m = other.GetComponentInParent<PlayerMovement>();
         if (m == null) return;
         if (self.isRecoiling) return;
+        if (self.controller == null) return;
         Vector2 dir;
         dir = m.bottomOffset.transform.position - self.bottomOffset.transform.position;
         dir.Normalize();
-        int damage = 1;
+        int damageTemp = 1;
         if (m.isRecoiling)
-            damage = 0;
+            damageTemp = 0;
         if (m && m != self)
         {
-            m.HitCharacter(dir * recoilSpeed, recoilTime, zeroRecoilTime);
+            m.HitCharacter(dir * recoilSpeed, recoilTime, zeroRecoilTime, damageTemp);
         }
 
     }

@@ -53,6 +53,10 @@ public class Attack : MonoBehaviour
     {
 
     }
+    public virtual bool CanAttack()
+    {
+        return !IsAttacking;
+    }
     public virtual void StartAttack()
     {
         doNextCombo = false;
@@ -66,13 +70,14 @@ public class Attack : MonoBehaviour
     }
     public virtual void EndAttack()
     {
-        doNextCombo = false;
         state = AttackState.None;
         if (!string.IsNullOrEmpty(attackTrigger))
         {
             hitbox.gameObject.SetActive(false);
-            self.anim.SetBool("attackDone", true);
+            if (!doNextCombo)
+                self.anim.SetBool("attackDone", true);
         }
+        doNextCombo = false;
     }
     public IEnumerator AttackUpdate()
     {
@@ -135,7 +140,7 @@ public class Attack : MonoBehaviour
         Vector3 result = localDirection;
         if (!self.isFacingRight)
             result.x *= -1;
-        target.HitCharacter(result, stunTime, stunTimeZero);
+        target.HitCharacter(result, stunTime, stunTimeZero, damage);
     }
     public virtual void OnAttackStartUp()
     {

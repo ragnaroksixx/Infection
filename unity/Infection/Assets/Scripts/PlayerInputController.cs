@@ -6,36 +6,37 @@ using UnityEngine;
 
 public class PlayerInputController : InputController
 {
-    public Movement originalPlayer;
+    public PlayerMovement originalPlayer;
     public static PlayerInputController instance;
-    public override void Awake()
+    Movement corruptingEnemy = null;
+    Movement holdingEnemy = null;
+    public void Awake()
     {
-        base.Awake();
         instance = this;
     }
-    public override void SetInput()
+    public override void SetInput(Movement m)
     {
-        base.SetInput();
-        if (!movement.IsSimulated && !movement.isRecoiling && !movement.IsAttacking())
+        if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && !canRelease)
         {
             if (Input.GetKey(KeyCode.A))
             {
-                movement.input.x -= 1;
+                m.input.x -= 1;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                movement.input.x += 1;
+                m.input.x += 1;
             }
         }
     }
-    public override void SetAttacks()
+    public override void SetAttacks(Movement m)
     {
-        base.SetAttacks();
-        if (!movement.IsAttacking())
+        base.SetAttacks(m);
+        if (!m.IsAttacking() && !canRelease)
         {
-            foreach (Attack attack in attacks)
+            foreach (Attack attack in m.attacks)
             {
-                if ((attack.isGroundAttack && movement.isGrounded || attack.isAirAttack && !movement.isGrounded) &&
+                if (!attack.CanAttack()) continue;
+                if ((attack.isGroundAttack && m.isGrounded || attack.isAirAttack && !m.isGrounded) &&
                     Input.GetKeyDown(attack.key))
                 {
                     attack.StartAttack();
@@ -44,18 +45,69 @@ public class PlayerInputController : InputController
             }
         }
     }
-    public override bool IsHoldingJump()
+    public override bool IsHoldingJump(Movement m)
     {
         return Input.GetKey(KeyCode.Space);
     }
 
-    public override bool IsFastFall()
+    public override bool IsFastFall(Movement m)
     {
         return Input.GetKey(KeyCode.S);
     }
 
-    public override bool Jump()
+    public override bool Jump(Movement m)
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space) && !canRelease;
+    }
+
+    bool canRelease;
+    public float absorbTime;
+    float absorbTimeTrack;
+
+    public bool IsCorrupting { get => corruptingEnemy != null; }
+    public bool IsHoldingObject { get => holdingEnemy != null; }
+    public Movement CorruptingEnemy { get => corruptingEnemy; set => corruptingEnemy = value; }
+    public Movement HoldingObject { get => holdingEnemy; set => holdingEnemy = value; }
+
+    public override void Update()
+    {
+        base.Update();
+        if (IsCorrupting)
+        {
+            if (!canRelease && Input.GetKeyDown(originalPlayer.corruptAttack.key))
+            {
+                canRelease = true;
+                absorbTimeTrack = 0;
+            }
+            if (canRelease)
+            {
+                if (Input.GetKeyUp(originalPlayer.corruptAttack.key) || absorbTimeTrack >= absorbTime)
+                {
+                    canRelease = false;
+                    if (absorbTimeTrack < absorbTime)
+                    {
+                        corruptingEnemy.SetController(null);
+                        corruptingEnemy.HitCharacter(Vector3.up * 5, .2f, 5, 0);
+                    }
+                    else
+                    {
+                        corruptingEnemy.Die();
+                        originalPlayer.Health.GainHP(1);
+                    }
+                    corruptingEnemy = null;
+                    originalPlayer.SetController(this);
+                }
+                else
+                {
+                    absorbTimeTrack += Time.deltaTime;
+                }
+            }
+        }
+    }
+
+    public void OnCorrupt(Movement m)
+    {
+        canRelease = false;
+        corruptingEnemy = m;
     }
 }
