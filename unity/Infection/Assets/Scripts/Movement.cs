@@ -51,13 +51,16 @@ public class Movement : MonoBehaviour
     public InputController controller;
     public int maxJumps = 1;
     int jumpTrack = 0;
-    public virtual void Start()
+    public virtual void Awake()
     {
         rBody = GetComponent<Rigidbody>();
+    }
+    public virtual void Start()
+    {
         jumpTrack = maxJumps;
         //anim = GetComponent<Animator>();
     }
-    private void Update()
+    public virtual void Update()
     {
         OnUpdate();
     }
@@ -88,7 +91,7 @@ public class Movement : MonoBehaviour
     {
         wasGrounded = isGrounded;
         isGrounded = Physics.OverlapSphere(bottomOffset.position, collisionRadius, groundLayer).Length > 0;
-        if (wasGrounded && !isGrounded)
+        if (!wasGrounded && isGrounded)
         {
             OnGrounded();
         }
@@ -142,6 +145,8 @@ public class Movement : MonoBehaviour
     public virtual void SetController(InputController ic)
     {
         controller = ic;
+        if (controller)
+            controller.AddAttacks(new Attack[0]);
     }
     public virtual bool IsHoldingJump()
     {

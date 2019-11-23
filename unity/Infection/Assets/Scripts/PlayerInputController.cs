@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class PlayerInputController : InputController
 {
+    public Movement originalPlayer;
+    public static PlayerInputController instance;
+    public override void Awake()
+    {
+        base.Awake();
+        instance = this;
+    }
     public override void SetInput()
     {
         base.SetInput();

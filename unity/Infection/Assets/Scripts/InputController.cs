@@ -9,9 +9,13 @@ public class InputController : MonoBehaviour
     public Movement movement;
     protected Attack[] attacks;
 
-    private void Awake()
+    public virtual void Awake()
     {
         attacks = new Attack[0];
+
+    }
+    private void Start()
+    {
         SetMovement(movement);
     }
     public void SetMovement(Movement m)

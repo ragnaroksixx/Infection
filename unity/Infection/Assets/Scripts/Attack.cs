@@ -36,6 +36,8 @@ public class Attack : MonoBehaviour
             return state != AttackState.None || (nextAttack != null && nextAttack.IsAttacking);
         }
     }
+    public string attackTrigger;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -56,12 +58,21 @@ public class Attack : MonoBehaviour
         doNextCombo = false;
         hitbox.gameObject.SetActive(true);
         StartCoroutine(AttackUpdate());
+        if (!string.IsNullOrEmpty(attackTrigger))
+        {
+            self.anim.SetBool("attackDone", false);
+            self.anim.SetTrigger(attackTrigger);
+        }
     }
     public virtual void EndAttack()
     {
         doNextCombo = false;
         state = AttackState.None;
-        hitbox.gameObject.SetActive(false);
+        if (!string.IsNullOrEmpty(attackTrigger))
+        {
+            hitbox.gameObject.SetActive(false);
+            self.anim.SetBool("attackDone", true);
+        }
     }
     public IEnumerator AttackUpdate()
     {
@@ -115,12 +126,16 @@ public class Attack : MonoBehaviour
         if (m is PlayerMovement && m.isRecoiling) return;
         if (m && m != self)
         {
-            Vector3 result = localDirection;
-            if (!self.isFacingRight)
-                result.x *= -1;
-            m.HitCharacter(result, stunTime, stunTimeZero);
+            ApplyAttackEffects(m);
         }
 
+    }
+    public virtual void ApplyAttackEffects(Movement target)
+    {
+        Vector3 result = localDirection;
+        if (!self.isFacingRight)
+            result.x *= -1;
+        target.HitCharacter(result, stunTime, stunTimeZero);
     }
     public virtual void OnAttackStartUp()
     {
