@@ -140,6 +140,7 @@ public class ClawAttack : Attack
     }
     public bool CanTarget(Movement m, float r)
     {
+        if (m == null) return false;
         float dist = Vector3.Distance(m.transform.position, self.transform.position);
         if (dist > r) return false;
 
