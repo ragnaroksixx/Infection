@@ -25,55 +25,13 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
-    animationCompression: 1
+    importConstraints: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths:
-    - exe_body
-    - Char_Root
-    - Char_Root/Helper_Torso
-    - Char_Root/Helper_Torso/Bone_Chest
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_L/Bone_Leg_Upper_L/Bone_Leg_Lower_L/Bone_Leg_L_Root
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R/Bone_Leg_Lower_R
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Hip_R/Bone_Upper_R/Bone_Leg_Lower_R/Bone_Leg_R_Root
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Thumb1/Bone_Thumb2/Bone_Thumb3/Bone_Thumb4
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger1/Bone_Finger2/Bone_Finger3/Bone_Finger4
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_L/Bone_Arm_Upper_L/Bone_Arm_Lower_L/Bone_Wrist/Bone_Finger5/Bone_Finger6/Bone_Finger7/Bone_Finger8
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Shoulder_R/Bone_Arm_Upper_R/Bone_Sword/Bone_Sword_Root
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Head
-    - Char_Root/Helper_Torso/Bone_Chest/Bone_Head/Bone_Head_Root
-    - Helper_Sword
-    - Helper_Sword/IK_Shield
-    - Helper_Leg_R
-    - Helper_Leg_R/IK_Leg_R
-    - Helper_Leg_L
-    - Helper_Leg_L/IK_Leg_L
-    - Helper_Arm_L
-    - Helper_Arm_L/IK_Wrist_L
+    extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
