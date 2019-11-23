@@ -16,6 +16,7 @@ public class ClawAttack : Attack
     public float pullEndPointOffset;
 
     public float range;
+    public float grabRange;
     public LayerMask targetLayers;
     public LayerMask groundLayer;
     public Transform holdPoint;
@@ -35,7 +36,12 @@ public class ClawAttack : Attack
         }
         else
         {
-            target = AutoTarget();
+            target = AutoTarget(grabRange);
+            if(target)
+            {
+                Grab(target);
+            }
+            target = AutoTarget(range);
             base.StartAttack();
         }
     }
@@ -99,9 +105,9 @@ public class ClawAttack : Attack
         claw.localRotation = localStartPose.rotation;
     }
 
-    public Movement AutoTarget()
+    public Movement AutoTarget(float r)
     {
-        Collider[] cols = Physics.OverlapSphere(self.transform.position, range, targetLayers);
+        Collider[] cols = Physics.OverlapSphere(self.transform.position, r, targetLayers);
         float closest = Mathf.Infinity;
         Movement result = null;
         foreach (Collider col in cols)
@@ -109,7 +115,7 @@ public class ClawAttack : Attack
             Movement m = col.GetComponentInParent<Movement>();
             if (m == null || m == self) continue;
             float dist = Vector3.Distance(m.transform.position, self.transform.position);
-            if (dist <= closest && dist < range)
+            if (dist <= closest && dist < r)
             {
                 if (self.isFacingRight)
                 {
