@@ -48,6 +48,7 @@ public class Movement : MonoBehaviour
     public bool IsSimulated { get => isSimulated; set => isSimulated = value; }
     public float CollisionRadius { get => collisionRadius; set => collisionRadius = value; }
     public Health Health { get => health; set => health = value; }
+    public Rigidbody RBody { get => rBody; }
 
     public InputController controller;
     public int maxJumps = 1;
@@ -63,6 +64,7 @@ public class Movement : MonoBehaviour
     public virtual void Awake()
     {
         rBody = GetComponent<Rigidbody>();
+        defaultConstraints = RBody.constraints;
         health = new Health(maxHP);
     }
     public virtual void Start()
@@ -164,6 +166,7 @@ public class Movement : MonoBehaviour
     public virtual bool ShouldJump()
     {
         bool canJump = jumpTrack > 0 || Time.time < coyoteTimeTrack;
+        canJump = canJump && !isSimulated;
         canJump = canJump && (controller && controller.Jump(this));
         canJump = canJump && !IsAttacking() && !isRecoiling;
         return canJump;
@@ -257,6 +260,7 @@ public class Movement : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    RigidbodyConstraints defaultConstraints;
     public void FreezeRBody()
     {
         rBody.useGravity = false;
@@ -266,7 +270,7 @@ public class Movement : MonoBehaviour
     public void UnFreezeRBody()
     {
         rBody.useGravity = true;
-        rBody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezeRotationZ;
+        rBody.constraints = defaultConstraints;
     }
 }
 

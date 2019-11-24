@@ -55,7 +55,7 @@ public class Attack : MonoBehaviour
     }
     public virtual bool CanAttack()
     {
-        return !IsAttacking;
+        return !IsAttacking && !self.IsSimulated;
     }
     public virtual void StartAttack()
     {

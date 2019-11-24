@@ -6,11 +6,10 @@ using DG.Tweening;
 public class ClawAttack : Attack
 {
     Movement target;
-    public Transform clawRoot;
-    public Transform claw;
     float clawToTargetDuration;
     float returnDuration;
     Pose localStartPose;
+    Pose throwRootlocalStartPose;
     public float pullSpeed;
     public float pullDuration;
     public float pullEndPointOffset;
@@ -21,11 +20,23 @@ public class ClawAttack : Attack
     public LayerMask groundLayer;
     public Transform holdPoint;
 
+    public Animator armAnim;
+
+    public Transform throwRoot;
+    Transform throwRootParentCache;
+
+    public Transform grappleArmObject;
+    Transform grappleArmParentCache;
+
+    public Transform throwSourcePoint;
     public override void Start()
     {
         clawToTargetDuration = startUpLag;
         returnDuration = endLag;
-        localStartPose = new Pose(claw.localPosition, claw.localRotation);
+        localStartPose = new Pose(grappleArmObject.localPosition, grappleArmObject.localRotation);
+        throwRootlocalStartPose = new Pose(throwRoot.localPosition, throwRoot.localRotation);
+        throwRootParentCache = throwRoot.parent;
+        grappleArmParentCache = grappleArmObject.parent;
         base.Start();
     }
     public override void StartAttack()
@@ -37,7 +48,7 @@ public class ClawAttack : Attack
         else
         {
             target = AutoTarget(grabRange);
-            if (target)
+            if (target && CanGrabObject(target))
             {
                 Grab(target);
             }
@@ -53,28 +64,35 @@ public class ClawAttack : Attack
         //base.OnAttackStartUp();
         Vector3 targetPos;
         Vector3 targetRotFwd;
+        PlayerInputController.instance.originalPlayer.UseSeperateArm();
         if (target)
         {
             target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration, 0, 0);
             targetPos = target.transform.position;
-            targetRotFwd = target.transform.position - clawRoot.transform.position;
+            targetRotFwd = target.transform.position - throwSourcePoint.position;
         }
         else
         {
             Vector3 forward = self.isFacingRight ? Vector3.right : Vector3.left;
             float noTargetRange = range / 3;
             RaycastHit hit;
-            if (Physics.Raycast(claw.transform.position, forward, out hit, noTargetRange, groundLayer))
+            if (Physics.Raycast(throwSourcePoint.position, forward, out hit, noTargetRange, groundLayer))
             {
                 noTargetRange = hit.distance;
             }
-            targetPos = claw.transform.position + forward * noTargetRange;
+            targetPos = throwSourcePoint.position + forward * noTargetRange;
             targetRotFwd = forward;
         }
 
-        claw.parent = null;
-        claw.transform.right = targetRotFwd;
-        claw.transform.DOMove(targetPos, clawToTargetDuration);
+        throwRoot.parent = null;
+
+        grappleArmObject.parent = throwRoot;
+        throwRoot.transform.right = targetRotFwd;
+        //grappleArmObject.localPosition = Vector3.zero;
+        //grappleArmObject.localRotation = Quaternion.identity;
+
+        throwRoot.transform.DOMove(targetPos, clawToTargetDuration);
+        armAnim.SetTrigger("grab");
     }
 
     public override void OnAttack()
@@ -85,7 +103,7 @@ public class ClawAttack : Attack
     public override void OnEndLagUpdate()
     {
         base.OnEndLagUpdate();
-        if (CanTarget(target, grabRange) && Input.GetKey(key))
+        if (CanTarget(target, grabRange) && Input.GetKey(key) && CanGrabObject(target))
         {
             EndAttack();
             Grab(target);
@@ -94,14 +112,16 @@ public class ClawAttack : Attack
     public override void OnEndLagStart()
     {
         base.OnEndLagStart();
-        claw.transform.DOMove(clawRoot.transform.position, returnDuration * 5);
+        throwRoot.transform.DOMove(throwSourcePoint.position, returnDuration * 5);
         if (target)
         {
             Vector3 pullTargetPos = self.bottomOffset.position + ((self.isFacingRight ? Vector3.right : Vector3.left) * pullEndPointOffset);
             Vector3 targetRotFwd = target.transform.position - pullTargetPos;
             targetRotFwd.Normalize();
             targetRotFwd *= -pullSpeed;
-            target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero, 0);
+            armAnim.SetTrigger("stopGrab");
+            if (CanPullObject(target))
+                target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero, 0);
         }
     }
     public override void EndAttack()
@@ -111,10 +131,18 @@ public class ClawAttack : Attack
     }
     public void ReturnClaw()
     {
-        claw.DOKill();
-        claw.parent = clawRoot;
-        claw.localPosition = localStartPose.position;
-        claw.localRotation = localStartPose.rotation;
+        throwRoot.DOKill();
+
+        grappleArmObject.parent = grappleArmParentCache;
+        grappleArmObject.localPosition = localStartPose.position;
+        grappleArmObject.localRotation = localStartPose.rotation;
+
+        throwRoot.parent = throwRootParentCache;
+        throwRoot.localPosition = Vector3.zero;
+        throwRoot.localRotation = Quaternion.identity;
+
+        if (!PlayerInputController.instance.IsHoldingObject)
+            PlayerInputController.instance.originalPlayer.UseAttachedArm();
     }
 
     public Movement AutoTarget(float r)
@@ -154,7 +182,7 @@ public class ClawAttack : Attack
             if (m.transform.position.x >= self.transform.position.x)
                 return false;
         }
-        if (Physics.Raycast(claw.transform.position, m.transform.position - claw.transform.position, dist * .9f, groundLayer))
+        if (Physics.Raycast(throwSourcePoint.position, m.transform.position - throwSourcePoint.position, dist * .9f, groundLayer))
             return false;
 
         return true;
@@ -163,6 +191,8 @@ public class ClawAttack : Attack
     public void Grab(Movement m)
     {
         PlayerInputController.instance.HoldingObject = m;
+        armAnim.SetBool("isHolding", true);
+        PlayerInputController.instance.originalPlayer.UseSeperateArm();
         m.FreezeRBody();
         m.SimulateInput(Vector2.zero);
         m.transform.SetParent(holdPoint);
@@ -173,6 +203,8 @@ public class ClawAttack : Attack
     public void Throw(Movement m)
     {
         PlayerInputController.instance.HoldingObject = null;
+        armAnim.SetBool("isHolding", false);
+        PlayerInputController.instance.originalPlayer.UseAttachedArm();
         m.UnFreezeRBody();
         Vector3 throwVelocity = new Vector3(9, 9);
         if (!self.isFacingRight)
@@ -183,5 +215,15 @@ public class ClawAttack : Attack
     public override bool CanAttack()
     {
         return base.CanAttack();// && !PlayerInputController.instance.IsHoldingObject;
+    }
+
+    public bool CanPullObject(Movement m)
+    {
+        return m.RBody.mass < self.RBody.mass;
+    }
+
+    public bool CanGrabObject(Movement m)
+    {
+        return m is IGrabable;
     }
 }

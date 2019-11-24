@@ -13,6 +13,9 @@ public class PlayerMovement : Movement
     public ClawAttack clawAttack;
     public CorruptAttack corruptAttack;
     public Transform graphic;
+    public Mesh wArm, woArm;
+    public SkinnedMeshRenderer skinnedMesh;
+    public GameObject seperatedArmMesh;
     public override void SetController(InputController ic)
     {
         base.SetController(ic);
@@ -33,6 +36,7 @@ public class PlayerMovement : Movement
     {
         base.Awake();
         instance = this;
+        UseAttachedArm();
         SetAttacks(meleeAttack, ariealAttack, clawAttack, corruptAttack);
     }
     public override void Update()
@@ -62,5 +66,17 @@ public class PlayerMovement : Movement
     {
         graphic.gameObject.SetActive(true);
         UnFreezeRBody();
+    }
+
+    public void UseSeperateArm()
+    {
+        skinnedMesh.sharedMesh = woArm;
+        seperatedArmMesh.SetActive(true);
+    }
+
+    public void UseAttachedArm()
+    {
+        skinnedMesh.sharedMesh = wArm;
+        seperatedArmMesh.SetActive(false);
     }
 }

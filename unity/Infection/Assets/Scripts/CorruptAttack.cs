@@ -10,6 +10,7 @@ public class CorruptAttack : Attack
     public override void ApplyAttackEffects(Movement target)
     {
         if (PlayerInputController.instance.IsCorrupting) return;
+        if (!(target is ICorruptable)) return;
         //base.ApplyAttackEffects(target);
         PlayerInputController.instance.OnCorrupt(target);
         self.SetController(null);
