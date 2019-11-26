@@ -15,7 +15,7 @@ public class PlayerMovement : Movement
     public Transform graphic;
     public Mesh wArm, woArm;
     public SkinnedMeshRenderer skinnedMesh;
-    public GameObject seperatedArmMesh;
+    public GameObject holdArm, grabArm;
     public override void SetController(InputController ic)
     {
         base.SetController(ic);
@@ -68,15 +68,17 @@ public class PlayerMovement : Movement
         UnFreezeRBody();
     }
 
-    public void UseSeperateArm()
+    public void UseSeperateArm(bool hArm)
     {
         skinnedMesh.sharedMesh = woArm;
-        seperatedArmMesh.SetActive(true);
+        holdArm.SetActive(hArm);
+        grabArm.SetActive(!hArm);
     }
 
     public void UseAttachedArm()
     {
         skinnedMesh.sharedMesh = wArm;
-        seperatedArmMesh.SetActive(false);
+        holdArm.SetActive(false);
+        grabArm.SetActive(false);
     }
 }

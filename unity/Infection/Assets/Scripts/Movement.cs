@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
     public Attack[] attacks;
     public int maxHP;
     Health health;
+    public int targetPriority;
     public void SetAttacks(params Attack[] atks)
     {
         attacks = atks;
@@ -238,8 +239,20 @@ public class Movement : MonoBehaviour
         recoilTrack = Time.time + stunTime;
         zeroRecoilTrack = recoilTrack + zeroVelocityTime;
         health.LoseHP(damage);
+
+        InterruptAttack();
     }
 
+    public void InterruptAttack()
+    {
+        if (IsAttacking())
+        {
+            foreach (Attack attack in attacks)
+            {
+                attack.InterruptAttack();
+            }
+        }
+    }
     public void SimulateInput(Vector2 i)
     {
         IsSimulated = true;

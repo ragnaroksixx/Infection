@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
     public MeshRenderer mesh;
 
     public Attack nextAttack;
-    bool doNextCombo;
+    protected bool doNextCombo;
     public KeyCode key = KeyCode.Mouse0;
     public enum AttackState
     {
@@ -23,7 +23,7 @@ public class Attack : MonoBehaviour
         Attack,
         EndLag
     }
-    AttackState state;
+    protected AttackState state;
     protected Movement self;
     public float stunTime = 0.1f;
     public float stunTimeZero = 0.1f;
@@ -45,7 +45,7 @@ public class Attack : MonoBehaviour
         endLag += attackDuration + startUpLag;
         comboTime += startUpLag + attackDuration + endLag;
         self = GetComponentInParent<Movement>();
-        hitbox.gameObject.SetActive(false);
+        SetHitBox(false);
     }
 
     // Update is called once per frame
@@ -60,11 +60,12 @@ public class Attack : MonoBehaviour
     public virtual void StartAttack()
     {
         doNextCombo = false;
-        hitbox.gameObject.SetActive(true);
+        SetHitBox(true);
         StartCoroutine(AttackUpdate());
         if (!string.IsNullOrEmpty(attackTrigger))
         {
             self.anim.SetBool("attackDone", false);
+            self.anim.SetBool("skip", false);
             self.anim.SetTrigger(attackTrigger);
         }
     }
@@ -73,21 +74,24 @@ public class Attack : MonoBehaviour
         state = AttackState.None;
         if (!string.IsNullOrEmpty(attackTrigger))
         {
-            hitbox.gameObject.SetActive(false);
+            SetHitBox(false);
             if (!doNextCombo)
                 self.anim.SetBool("attackDone", true);
         }
         doNextCombo = false;
     }
+    float time = 0;
+    protected float timeAddition = 0;
     public IEnumerator AttackUpdate()
     {
-        float time = 0;
+        time = 0;
+        timeAddition = 0;
         float startTime = Time.time;
         state = AttackState.StartUP;
         OnAttackStartUp();
         while (true)
         {
-            time = Time.time - startTime;
+            time = Time.time - startTime + timeAddition;
             if (time < startUpLag)
             {
                 OnStartUpUpdate();
@@ -125,7 +129,7 @@ public class Attack : MonoBehaviour
             nextAttack.StartAttack();
         EndAttack();
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         Movement m = other.GetComponentInParent<Movement>();
         if (m is PlayerMovement && m.isRecoiling) return;
@@ -154,7 +158,7 @@ public class Attack : MonoBehaviour
     public virtual void OnAttack()
     {
         self.StopSimulateInput();
-        hitbox.enabled = mesh.enabled = true;
+        SetHitBox(true);
         state = AttackState.Attack;
     }
     public virtual void OnAttackUpdate()
@@ -163,11 +167,31 @@ public class Attack : MonoBehaviour
     }
     public virtual void OnEndLagStart()
     {
-        hitbox.enabled = mesh.enabled = false;
+        SetHitBox(false);
         state = AttackState.EndLag;
     }
     public virtual void OnEndLagUpdate()
     {
 
+    }
+
+    public void SetHitBox(bool value)
+    {
+        hitbox.enabled = value;
+        mesh.enabled = value;
+    }
+
+    public virtual void InterruptAttack()
+    {
+        if (state != AttackState.None)
+        {
+            SetHitBox(false);
+            doNextCombo = false;
+            timeAddition += 1000;
+            self.StopSimulateInput();
+            EndAttack();
+        }
+        if (nextAttack)
+            nextAttack.InterruptAttack();
     }
 }

@@ -20,9 +20,9 @@ TagManager:
   - HitBox
   - HurtBox
   - ClawScanner
-  - 
-  - 
-  - 
+  - Enemy
+  - WorldObject
+  - GroundCollisionHelp
   - 
   - 
   - 

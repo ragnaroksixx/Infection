@@ -20,7 +20,7 @@ public class ClawAttack : Attack
     public LayerMask groundLayer;
     public Transform holdPoint;
 
-    public Animator armAnim;
+    public Animator holdAnim, grabAnim;
 
     public Transform throwRoot;
     Transform throwRootParentCache;
@@ -41,6 +41,8 @@ public class ClawAttack : Attack
     }
     public override void StartAttack()
     {
+        isPullingObject = false;
+        isPullingSelf = false;
         if (PlayerInputController.instance.IsHoldingObject)
         {
             Throw(PlayerInputController.instance.HoldingObject);
@@ -64,7 +66,7 @@ public class ClawAttack : Attack
         //base.OnAttackStartUp();
         Vector3 targetPos;
         Vector3 targetRotFwd;
-        PlayerInputController.instance.originalPlayer.UseSeperateArm();
+        PlayerInputController.instance.originalPlayer.UseSeperateArm(false);
         if (target)
         {
             target.HitCharacter(Vector3.one * 0.001f, clawToTargetDuration, 0, 0);
@@ -87,12 +89,12 @@ public class ClawAttack : Attack
         throwRoot.parent = null;
 
         grappleArmObject.parent = throwRoot;
-        throwRoot.transform.right = targetRotFwd;
+        throwRoot.transform.forward = targetRotFwd;
         //grappleArmObject.localPosition = Vector3.zero;
         //grappleArmObject.localRotation = Quaternion.identity;
 
         throwRoot.transform.DOMove(targetPos, clawToTargetDuration);
-        armAnim.SetTrigger("grab");
+        grabAnim.SetTrigger("grab");
     }
 
     public override void OnAttack()
@@ -100,15 +102,11 @@ public class ClawAttack : Attack
         base.OnAttack();
 
     }
-    public override void OnEndLagUpdate()
-    {
-        base.OnEndLagUpdate();
-        if (CanTarget(target, grabRange) && Input.GetKey(key) && CanGrabObject(target))
-        {
-            EndAttack();
-            Grab(target);
-        }
-    }
+
+    bool isPullingObject;
+    bool isPullingSelf;
+    Vector3 pullDir;
+
     public override void OnEndLagStart()
     {
         base.OnEndLagStart();
@@ -119,13 +117,48 @@ public class ClawAttack : Attack
             Vector3 targetRotFwd = target.transform.position - pullTargetPos;
             targetRotFwd.Normalize();
             targetRotFwd *= -pullSpeed;
-            armAnim.SetTrigger("stopGrab");
+            grabAnim.SetTrigger("stopGrab");
             if (CanPullObject(target))
+            {
+                isPullingObject = true;
                 target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero, 0);
+            }
+            else
+            {
+                isPullingSelf = true;
+                PullSelf(target);
+            }
         }
+    }
+    public override void OnEndLagUpdate()
+    {
+        base.OnEndLagUpdate();
+        if (isPullingObject)
+        {
+            if (CanTarget(target, grabRange) && Input.GetKey(key) && CanGrabObject(target))
+            {
+                EndAttack();
+                Grab(target);
+            }
+        }
+        if (isPullingSelf)
+        {
+            self.SimulateInput(pullDir);
+        }
+    }
+    public float pullStrength = 1;
+    public void PullSelf(Movement target)
+    {
+        pullDir = self.transform.position - target.transform.position;
+        pullDir.y = 0;
+        pullDir.z = 0;
+        pullDir.Normalize();
+        pullDir *= pullStrength;
     }
     public override void EndAttack()
     {
+        if (isPullingSelf)
+            self.StopSimulateInput();
         base.EndAttack();
         ReturnClaw();
     }
@@ -155,8 +188,9 @@ public class ClawAttack : Attack
             Movement m = col.GetComponentInParent<Movement>();
             if (m == null || m == self) continue;
             float dist = Vector3.Distance(m.transform.position, self.transform.position);
-            if (dist <= closest)
+            if (dist <= closest || (result && m.targetPriority > result.targetPriority))
             {
+                if (result && m.targetPriority < result.targetPriority) continue;
                 if (CanTarget(m, r))
                 {
                     result = m;
@@ -191,8 +225,8 @@ public class ClawAttack : Attack
     public void Grab(Movement m)
     {
         PlayerInputController.instance.HoldingObject = m;
-        armAnim.SetBool("isHolding", true);
-        PlayerInputController.instance.originalPlayer.UseSeperateArm();
+        holdAnim.SetBool("isHolding", true);
+        PlayerInputController.instance.originalPlayer.UseSeperateArm(true);
         m.FreezeRBody();
         m.SimulateInput(Vector2.zero);
         m.transform.SetParent(holdPoint);
@@ -203,7 +237,7 @@ public class ClawAttack : Attack
     public void Throw(Movement m)
     {
         PlayerInputController.instance.HoldingObject = null;
-        armAnim.SetBool("isHolding", false);
+        holdAnim.SetBool("isHolding", false);
         PlayerInputController.instance.originalPlayer.UseAttachedArm();
         m.UnFreezeRBody();
         Vector3 throwVelocity = new Vector3(9, 9);

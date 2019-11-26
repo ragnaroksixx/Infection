@@ -10,10 +10,12 @@ public class RoomTransition : MonoBehaviour
     public float fadeTime = 1;
     public Collider col;
     Room currentRoom;
+    Door d;
     // Start is called before the first frame update
     void Start()
     {
         currentRoom = GetComponentInParent<Room>();
+        d = GetComponentInChildren<Door>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class RoomTransition : MonoBehaviour
     void StartTransitionExit(PlayerMovement pm)
     {
         if (pm == null) return;
+        pm.InterruptAttack();
         Vector2 dir = exitEndPoint.position - exitStartPoint.position;
         dir.Normalize();
         //Disable player controls
@@ -36,12 +39,14 @@ public class RoomTransition : MonoBehaviour
         currentRoom.Exit();
         //Start Fade to black
         ScreenFader.FadeToBlack(fadeTime, () => { nextRoom.StartTransitionEnter(pm); });
-
+        if (nextRoom.d)
+            nextRoom.d.Open();
         //Wait on black for X seconds
 
     }
     void StartTransitionEnter(PlayerMovement pm)
     {
+        pm.InterruptAttack();
         col.enabled = false;
         //Teleport player and camera to next Room
         pm.transform.position = entryStartPoint.position;
@@ -53,6 +58,8 @@ public class RoomTransition : MonoBehaviour
         //Enable player controls
         pm.StopSimulateInput();
         col.enabled = true;
+        if (d)
+            d.Close();
     }
 
     IEnumerator EndTransitionUpdate(PlayerMovement pm)
