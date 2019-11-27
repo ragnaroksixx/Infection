@@ -143,17 +143,21 @@ public class ClawAttack : Attack
         }
         if (isPullingSelf)
         {
-            self.SimulateInput(pullDir);
+            // self.SimulateInput(pullDir);
         }
     }
     public float pullStrength = 1;
+    public float minPull, maxPull;
     public void PullSelf(Movement target)
     {
-        pullDir = self.transform.position - target.transform.position;
-        pullDir.y = 0;
+        pullDir = -self.transform.position + target.transform.position;
+        //pullDir.y = 0;
         pullDir.z = 0;
-        pullDir.Normalize();
+        //pullDir.Normalize();
         pullDir *= pullStrength;
+        pullDir.x = Mathf.Sign(pullDir.x) * Mathf.Clamp(Mathf.Abs(pullDir.x), minPull, maxPull);
+        pullDir.y = Mathf.Sign(pullDir.y) * Mathf.Clamp(Mathf.Abs(pullDir.y), minPull, maxPull);
+        self.HitCharacter(pullDir, pullDuration, 0, 0);
     }
     public override void EndAttack()
     {
