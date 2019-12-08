@@ -18,11 +18,11 @@ public class PlayerInputController : InputController
     {
         if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && !canRelease)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (InputHandler.IsMovingLeft())
             {
                 m.input.x -= 1;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (InputHandler.IsMovingRight())
             {
                 m.input.x += 1;
             }
@@ -47,17 +47,18 @@ public class PlayerInputController : InputController
     }
     public override bool IsHoldingJump(Movement m)
     {
-        return Input.GetKey(KeyCode.Space);
+        Debug.Log(InputHandler.IsJumpKey());
+        return InputHandler.IsJumpKey();
     }
 
     public override bool IsFastFall(Movement m)
     {
-        return Input.GetKey(KeyCode.S);
+        return InputHandler.IsFastFall();
     }
 
     public override bool Jump(Movement m)
     {
-        return Input.GetKeyDown(KeyCode.Space) && !canRelease;
+        return InputHandler.IsJumpKeyDown() && !canRelease;
     }
 
     bool canRelease;
@@ -94,8 +95,7 @@ public class PlayerInputController : InputController
                         corruptingEnemy.Die();
                         originalPlayer.Health.GainHP(1);
                     }
-                    corruptingEnemy = null;
-                    originalPlayer.SetController(this);
+                    ReleasCorruption();
                 }
                 else
                 {
@@ -104,7 +104,11 @@ public class PlayerInputController : InputController
             }
         }
     }
-
+    public void ReleasCorruption()
+    {
+        corruptingEnemy = null;
+        originalPlayer.SetController(this);
+    }
     public void OnCorrupt(Movement m)
     {
         canRelease = false;

@@ -68,6 +68,11 @@ public class PlayerMovement : Movement
         UnFreezeRBody();
     }
 
+    public override void Die()
+    {
+        SaveLoad.ReloadScene();
+        base.Die();
+    }
     public void UseSeperateArm(bool hArm)
     {
         skinnedMesh.sharedMesh = woArm;

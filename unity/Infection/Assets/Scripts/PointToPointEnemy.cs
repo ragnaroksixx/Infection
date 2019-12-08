@@ -14,6 +14,7 @@ public class PointToPointEnemy : EnemyMovement
 
     public bool targetingA;
     public bool ignoreY = true;
+    public bool flier;
     public void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(PointA, 0.2f);
@@ -22,11 +23,12 @@ public class PointToPointEnemy : EnemyMovement
     public override void SetInput(Movement m)
     {
         base.SetInput(m);
-        if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && m.isGrounded)
+        if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && (m.isGrounded || flier))
         {
             Vector3 delta = Target - transform.position;
             if (ignoreY)
                 delta.y = 0;
+            delta.z = 0;
             float dist = delta.magnitude;
             if (dist < 0.1f)
                 targetingA = !targetingA;

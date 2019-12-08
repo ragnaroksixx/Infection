@@ -194,6 +194,7 @@ public class ClawAttack : Attack
             float dist = Vector3.Distance(m.transform.position, self.transform.position);
             if (dist <= closest || (result && m.targetPriority > result.targetPriority))
             {
+                if (m.targetPriority < 0) continue;
                 if (result && m.targetPriority < result.targetPriority) continue;
                 if (CanTarget(m, r))
                 {
@@ -207,21 +208,38 @@ public class ClawAttack : Attack
     public bool CanTarget(Movement m, float r)
     {
         if (m == null) return false;
-        float dist = Vector3.Distance(m.transform.position, self.transform.position);
+        float dist = Vector3.Distance(m.transform.position, throwSourcePoint.position);
         if (dist > r) return false;
 
+        float angle = Vector3.SignedAngle(-self.transform.position + m.transform.position, self.transform.up, Vector3.up);
         if (self.isFacingRight)
         {
             if (m.transform.position.x <= self.transform.position.x)
-                return false;
+            {
+                if (angle > 30)
+                    return false;
+            }
+
         }
         else
         {
             if (m.transform.position.x >= self.transform.position.x)
-                return false;
+            {
+                if (angle > 30)
+                    return false;
+            }
         }
-        if (Physics.Raycast(throwSourcePoint.position, m.transform.position - throwSourcePoint.position, dist * .9f, groundLayer))
+        RaycastHit hit;
+        if (Physics.Raycast(throwSourcePoint.position, m.transform.position - throwSourcePoint.position, out hit, dist * .9f, groundLayer))
+        {
+            Debug.DrawRay(throwSourcePoint.position, m.transform.position - throwSourcePoint.position, Color.red, 5);
+            Transform t = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+            t.position = hit.point;
+            t.localScale = Vector3.one * 0.1f;
+
             return false;
+        }
+
 
         return true;
 
@@ -231,6 +249,8 @@ public class ClawAttack : Attack
         PlayerInputController.instance.HoldingObject = m;
         holdAnim.SetBool("isHolding", true);
         PlayerInputController.instance.originalPlayer.UseSeperateArm(true);
+        IGrabable grabable = m as IGrabable;
+        grabable.OnGrab();
         m.FreezeRBody();
         m.SimulateInput(Vector2.zero);
         m.transform.SetParent(holdPoint);
@@ -240,15 +260,21 @@ public class ClawAttack : Attack
 
     public void Throw(Movement m)
     {
-        PlayerInputController.instance.HoldingObject = null;
-        holdAnim.SetBool("isHolding", false);
-        PlayerInputController.instance.originalPlayer.UseAttachedArm();
+        Drop();
         m.UnFreezeRBody();
         Vector3 throwVelocity = new Vector3(9, 9);
         if (!self.isFacingRight)
             throwVelocity.x *= -1;
         m.transform.SetParent(null);
+        IGrabable grabable = m as IGrabable;
+        grabable.OnThrow();
         m.HitCharacter(throwVelocity, .251f, 3f, 0);
+    }
+    public void Drop()
+    {
+        PlayerInputController.instance.HoldingObject = null;
+        holdAnim.SetBool("isHolding", false);
+        PlayerInputController.instance.originalPlayer.UseAttachedArm();
     }
     public override bool CanAttack()
     {

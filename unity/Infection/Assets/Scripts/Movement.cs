@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 
 public class Movement : MonoBehaviour
@@ -161,7 +160,7 @@ public class Movement : MonoBehaviour
     }
     public virtual bool IsHoldingJump()
     {
-        return jumpHoldTimeTrack > 0;
+        return jumpHoldTimeTrack > 0 && controller.IsHoldingJump(this);
     }
 
     public virtual bool ShouldJump()
@@ -239,7 +238,10 @@ public class Movement : MonoBehaviour
         recoilTrack = Time.time + stunTime;
         zeroRecoilTrack = recoilTrack + zeroVelocityTime;
         health.LoseHP(damage);
-
+        if (health.currentHP <= 0)
+        {
+            Die();
+        }
         InterruptAttack();
     }
 

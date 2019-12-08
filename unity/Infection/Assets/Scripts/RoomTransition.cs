@@ -37,10 +37,16 @@ public class RoomTransition : MonoBehaviour
         //Move player right until fade complete
         pm.SimulateInput(dir);
         currentRoom.Exit();
+
         //Start Fade to black
-        ScreenFader.FadeToBlack(fadeTime, () => { nextRoom.StartTransitionEnter(pm); });
+        ScreenFader.FadeToBlack(fadeTime, () =>
+        {
+            nextRoom.StartTransitionEnter(pm);
+            if (d)
+                d.Close();
+        });
         if (nextRoom.d)
-            nextRoom.d.Open();
+            nextRoom.d.Open(true);
         //Wait on black for X seconds
 
     }
@@ -77,7 +83,7 @@ public class RoomTransition : MonoBehaviour
         while (true)
         {
             float distance = Vector3.Distance(pm.transform.position, entryEndPoint.position);
-            if (distance <= 0.01f)
+            if (distance <= 0.1f)
             {
                 EndTransition(pm);
                 yield break;
