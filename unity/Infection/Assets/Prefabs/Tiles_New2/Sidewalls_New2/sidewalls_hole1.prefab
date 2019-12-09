@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 5641938705860611823}
   - component: {fileID: 1986562392517313801}
   - component: {fileID: 2405516255107299688}
-  - component: {fileID: 6390190004589736978}
+  - component: {fileID: 3739089574566681953}
+  - component: {fileID: 5969079281179490213}
   m_Layer: 0
   m_Name: sidewalls_hole1
   m_TagString: Untagged
@@ -110,8 +111,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6390190004589736978
-MeshCollider:
+--- !u!65 &3739089574566681953
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,7 +121,19 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 7363589800082613071, guid: 59e78aee185c73147a39a2842a644aa0, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.22, z: 5.6321}
+  m_Center: {x: -0.5, y: 1.69, z: 2.81605}
+--- !u!65 &5969079281179490213
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8585752678656285062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.22, z: 5.6321}
+  m_Center: {x: -0.5, y: 10.32, z: 2.81605}

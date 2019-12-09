@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8571241026774265002}
   - component: {fileID: 783427106413850592}
   - component: {fileID: 4861056322728752160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5131457948405563782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}

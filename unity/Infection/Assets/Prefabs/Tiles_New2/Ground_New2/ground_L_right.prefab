@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4360852966618845767}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_L_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6566849319800814217}
   - component: {fileID: 4606648543365902014}
   - component: {fileID: 2494803792062020683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd2dc1a331d528748b112fd79f50c200, type: 2}
+  - {fileID: 2100000, guid: 51c657dc2446a154bb4254358232fbe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: -2951645774962769334
     second: exe_anim_run3
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 02 - Default
+    second: {fileID: 2100000, guid: 408cfb60c0757514ca188f01e439f088, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

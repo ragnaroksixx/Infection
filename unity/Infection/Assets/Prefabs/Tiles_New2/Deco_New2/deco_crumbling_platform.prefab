@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4560954497843158616}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_crumbling_platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3557258747078637760}
   - component: {fileID: 689973421840305573}
   - component: {fileID: 5176687829069594389}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_crumbling_platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

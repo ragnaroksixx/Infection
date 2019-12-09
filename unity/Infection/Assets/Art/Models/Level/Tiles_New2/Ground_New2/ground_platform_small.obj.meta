@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ground_platform_smallMat
-    second: {fileID: 2100000, guid: cd2dc1a331d528748b112fd79f50c200, type: 2}
+    second: {fileID: 2100000, guid: 51c657dc2446a154bb4254358232fbe9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5315478291084770819}
   - component: {fileID: 8225323204725872431}
   - component: {fileID: 923413392093656053}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_bump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd2dc1a331d528748b112fd79f50c200, type: 2}
+  - {fileID: 2100000, guid: 51c657dc2446a154bb4254358232fbe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6764816212202741403}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_bump
   m_TagString: Untagged
   m_Icon: {fileID: 0}

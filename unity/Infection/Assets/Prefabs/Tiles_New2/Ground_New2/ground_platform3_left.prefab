@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 61986231856837088}
-  m_Layer: 0
-  m_Name: ground_platform3
+  m_Layer: 8
+  m_Name: ground_platform3_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2343189262314280677}
   - component: {fileID: 6932955179762618066}
   - component: {fileID: 8261562849452194737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ground_platform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd2dc1a331d528748b112fd79f50c200, type: 2}
+  - {fileID: 2100000, guid: 51c657dc2446a154bb4254358232fbe9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

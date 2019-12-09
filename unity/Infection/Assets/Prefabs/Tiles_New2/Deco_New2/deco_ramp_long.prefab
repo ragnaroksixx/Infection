@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4270274113773579890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_ramp_long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2837178987135465825}
   - component: {fileID: 7938373268529523695}
   - component: {fileID: 4307619271468588842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_ramp_long
   m_TagString: Untagged
   m_Icon: {fileID: 0}

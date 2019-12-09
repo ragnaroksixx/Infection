@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8363774953052709321}
   - component: {fileID: 4609660919382210586}
   - component: {fileID: 7536797707291520507}
-  - component: {fileID: 1159208475219412676}
+  - component: {fileID: 8538805595971788572}
   m_Layer: 0
   m_Name: sidewalls_hightop
   m_TagString: Untagged
@@ -79,8 +79,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1159208475219412676
-MeshCollider:
+--- !u!65 &8538805595971788572
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,10 +89,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 1714930911858792200, guid: 1c91f4ae4e69dbc40814274772babe5f, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.3, z: 5.6321}
+  m_Center: {x: -0.5, y: 10.36, z: 2.81605}
 --- !u!1 &3240795389488568005
 GameObject:
   m_ObjectHideFlags: 0

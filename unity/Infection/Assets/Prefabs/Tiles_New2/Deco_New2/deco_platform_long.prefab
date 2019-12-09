@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201039986260313732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_platform_long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3787435292407054561}
   - component: {fileID: 599849648206059280}
   - component: {fileID: 2937296861547142099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_platform_long
   m_TagString: Untagged
   m_Icon: {fileID: 0}

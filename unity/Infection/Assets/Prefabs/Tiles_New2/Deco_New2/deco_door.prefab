@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2346784836129763959}
   - component: {fileID: 6835334722292844985}
   - component: {fileID: 2712973874959953204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f177aa20d673cc24b93f94430c1e7575, type: 2}
+  - {fileID: 2100000, guid: 219804f81b1e7a2429796ad21b231a30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 49269681213780240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

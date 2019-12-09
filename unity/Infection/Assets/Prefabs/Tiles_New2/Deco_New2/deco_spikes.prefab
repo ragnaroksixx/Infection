@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4550507341140513593}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1653687602732929923}
   - component: {fileID: 336556087095942613}
   - component: {fileID: 1511998181691132365}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: deco_spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,5 +121,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2788, y: 1.5512, z: 5.2572}
+  m_Size: {x: 2.2788, y: 1.13, z: 5.2572}
   m_Center: {x: -1.1394, y: 0.7756, z: -2.6286}
