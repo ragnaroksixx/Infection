@@ -22,7 +22,7 @@ public static class InputHandler
     }
     public static bool IsJumpKey()
     {
-        return controls.Player.SlowFall.phase == InputActionPhase.Started;
+        return controls.Player.SlowFall.phase == InputActionPhase.Started || Input.GetKey(KeyCode.Space);
     }
     public static bool IsJumpKeyDown()
     {
