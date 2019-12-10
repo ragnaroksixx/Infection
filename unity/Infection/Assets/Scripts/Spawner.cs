@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     public bool killOnPlayerStart;
 
     public KeyType keyType;
+    public bool reSpawnOnDie;
+
     public void Kill()
     {
         if (instance)

@@ -7,6 +7,7 @@ public class EnemyHitbox : MonoBehaviour
     public float recoilSpeed = 5;
     public float recoilTime = 0.5f;
     public float zeroRecoilTime = 0.2f;
+    public int damage = 1;
     // Use this for initialization
     void Start()
     {
@@ -22,7 +23,7 @@ public class EnemyHitbox : MonoBehaviour
         Vector2 dir;
         dir = m.bottomOffset.transform.position - self.bottomOffset.transform.position;
         dir.Normalize();
-        int damageTemp = 1;
+        int damageTemp = damage;
         if (m.isRecoiling)
             damageTemp = 0;
         if (m && m != self)

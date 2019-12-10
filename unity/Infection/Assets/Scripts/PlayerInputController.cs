@@ -47,7 +47,6 @@ public class PlayerInputController : InputController
     }
     public override bool IsHoldingJump(Movement m)
     {
-        Debug.Log(InputHandler.IsJumpKey());
         return InputHandler.IsJumpKey();
     }
 
