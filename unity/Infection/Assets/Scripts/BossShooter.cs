@@ -11,14 +11,17 @@ public class BossShooter : MonoBehaviour
     public float spinSpeed, shootSpeed;
     public float timeBtwShoots;
     float timeTrack;
-
+    private void Start()
+    {
+        Stop();
+    }
     public void StartShooting()
     {
-
+        enabled = true;
     }
     public void Stop()
     {
-
+        enabled = false;
     }
     private void Update()
     {

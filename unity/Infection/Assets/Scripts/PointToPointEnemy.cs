@@ -17,6 +17,7 @@ public class PointToPointEnemy : EnemyMovement
     public bool flier;
     public void OnDrawGizmosSelected()
     {
+        if (room == null) return;
         Gizmos.DrawSphere(PointA, 0.2f);
         Gizmos.DrawSphere(PointB, 0.2f);
     }

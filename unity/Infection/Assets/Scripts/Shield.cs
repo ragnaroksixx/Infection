@@ -1,26 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class Shield : MonoBehaviour
 {
+    public int HP = 3;
     public void Init(Vector3 size)
     {
-
-    }
-    // Use this for initialization
-    void Start()
-    {
-
+        transform.localScale = Vector3.zero;
+        transform.DOScale(size, 1.25f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 }

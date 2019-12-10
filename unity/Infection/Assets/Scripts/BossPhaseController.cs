@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 
 
 public class BossPhaseController : MonoBehaviour
@@ -24,6 +24,7 @@ public class BossPhaseController : MonoBehaviour
     public Shield shieldPrefab;
     Shield shieldInstance;
     public int numPhases;
+    public GameObject[] grapplePoints;
     public void StartBattle()
     {
         ChangePhase(Phase.ONE);
@@ -53,6 +54,7 @@ public class BossPhaseController : MonoBehaviour
                 break;
         }
     }
+    [Button]
     public void ChangePhase(Phase p)
     {
         ExitPhase(phase);
@@ -68,6 +70,10 @@ public class BossPhaseController : MonoBehaviour
             case Phase.ONE:
                 shooter.StartShooting();
                 room.ShowFloor(false);
+                foreach (GameObject g in grapplePoints)
+                {
+                    g.SetActive(true);
+                }
                 break;
             case Phase.TWO:
                 room.ShowFloor(true);
@@ -76,8 +82,12 @@ public class BossPhaseController : MonoBehaviour
                     item.reSpawnOnDie = true;
                     item.Spawn(room);
                 }
+                foreach (GameObject g in grapplePoints)
+                {
+                    g.SetActive(false);
+                }
                 shieldInstance = GameObject.Instantiate(shieldPrefab, transform.position, Quaternion.identity);
-                //shieldInstance.Init();
+                shieldInstance.Init(new Vector3(10, 6, 3));
                 break;
             case Phase.DEAD:
                 break;
