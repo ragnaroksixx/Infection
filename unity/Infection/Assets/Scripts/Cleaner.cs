@@ -40,8 +40,11 @@ public class Cleaner : MonoBehaviour
         timetrack += Time.deltaTime * speed;
         Vector3 nextHeadPos = GetBezierPosition(NormalTime, StartPoint, EndPoint);
         nextHeadPos.z = 0;
-        head.transform.right = -head.transform.position + nextHeadPos;
         rBody.MovePosition(nextHeadPos);
+        nextHeadPos = -head.transform.position + nextHeadPos;
+        nextHeadPos.Normalize();
+        Vector3 forw = Vector3.Slerp(transform.forward, nextHeadPos, Time.deltaTime * 25);
+        head.transform.forward = rBody.velocity;
         AddToBuffer();
     }
 

@@ -57,6 +57,7 @@ public class ClawAttack : Attack
             else
             {
                 target = AutoTarget(range);
+                AudioManager.Play(sfx, self.transform.position);
                 base.StartAttack();
             }
         }

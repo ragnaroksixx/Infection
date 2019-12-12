@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
         a.transform.position = pos;
         a.clip = ac;
         a.Play();
+        Instance.StartCoroutine(Instance.ReturnOnStop(a));
     }
 
     IEnumerator ReturnOnStop(AudioSource a)

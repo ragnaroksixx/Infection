@@ -85,6 +85,8 @@ public class RoomTransition : MonoBehaviour
             float distance = Vector3.Distance(pm.transform.position, entryEndPoint.position);
             if (distance <= 0.1f)
             {
+                pm.SimulateInput(Vector3.zero);
+                yield return new WaitForSeconds(1);
                 EndTransition(pm);
                 yield break;
             }

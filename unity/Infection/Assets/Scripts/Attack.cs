@@ -68,7 +68,6 @@ public class Attack : MonoBehaviour
             self.anim.SetBool("skip", false);
             self.anim.SetTrigger(attackTrigger);
         }
-        AudioManager.Play(sfx, self.transform.position);
     }
     public virtual void EndAttack()
     {
@@ -146,6 +145,7 @@ public class Attack : MonoBehaviour
         if (!self.isFacingRight)
             result.x *= -1;
         target.HitCharacter(result, stunTime, stunTimeZero, damage);
+        AudioManager.Play(sfx, self.transform.position);
     }
     public virtual void OnAttackStartUp()
     {
