@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    public virtual void Start()
+    {
 
+    }
     public virtual void Update()
     {
 

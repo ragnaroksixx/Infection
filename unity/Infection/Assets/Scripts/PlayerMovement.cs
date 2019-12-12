@@ -68,10 +68,10 @@ public class PlayerMovement : Movement
         UnFreezeRBody();
     }
 
-    public override void Die()
+    public override void Die(bool ignoreSpawn)
     {
         SaveLoad.ReloadScene();
-        base.Die();
+        base.Die(ignoreSpawn);
     }
     public void UseSeperateArm(bool hArm)
     {

@@ -23,11 +23,24 @@ public class BossPhaseController : MonoBehaviour
     int healthCheck;
     public Shield shieldPrefab;
     Shield shieldInstance;
-    public int numPhases;
+    public int numPhases = 4;
     public GameObject[] grapplePoints;
+    private void Start()
+    {
+        StartBattle();
+    }
     public void StartBattle()
     {
+        foreach (Spawner item in spawners)
+        {
+            item.reSpawnOnDie = false;
+            item.Kill();
+        }
         ChangePhase(Phase.ONE);
+    }
+    private void Update()
+    {
+        PhaseUpdate();
     }
     public void PhaseUpdate()
     {
@@ -74,6 +87,7 @@ public class BossPhaseController : MonoBehaviour
                 {
                     g.SetActive(true);
                 }
+                healthCheck = boss.Health.currentHP - (boss.Health.maxHP / numPhases);
                 break;
             case Phase.TWO:
                 room.ShowFloor(true);

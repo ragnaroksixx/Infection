@@ -48,6 +48,7 @@ public class Movement : MonoBehaviour
     public float CollisionRadius { get => collisionRadius; set => collisionRadius = value; }
     public Health Health { get => health; set => health = value; }
     public Rigidbody RBody { get => rBody; }
+    public Spawner Spawn { get => spawn; set => spawn = value; }
 
     public InputController controller;
     public int maxJumps = 1;
@@ -58,7 +59,7 @@ public class Movement : MonoBehaviour
     Health health;
     public int targetPriority;
     public AudioClip jumpSFX, hitSFX, dieSFX;
-
+    Spawner spawn;
     public void SetAttacks(params Attack[] atks)
     {
         attacks = atks;
@@ -212,7 +213,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void FaceDirection(bool right)
+    public void FaceDirection(bool right)
     {
         isFacingRight = right;
         transform.localEulerAngles = new Vector3(0, right ? 0 : 180, 0);
@@ -278,8 +279,12 @@ public class Movement : MonoBehaviour
         return false;
     }
 
-    public virtual void Die()
+    public virtual void Die(bool ignoreSpawn = false)
     {
+        if (spawn && !ignoreSpawn)
+        {
+            spawn.OnDieCallback();
+        }
         Destroy(this.gameObject);
         AudioManager.Play(dieSFX, transform.position);
     }

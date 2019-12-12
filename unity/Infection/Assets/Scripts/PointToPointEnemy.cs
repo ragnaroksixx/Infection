@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class PointToPointEnemy : EnemyMovement
 {
     public Vector3 localPointA, localPointB;
@@ -40,6 +38,5 @@ public class PointToPointEnemy : EnemyMovement
 
         }
     }
-
 }
 

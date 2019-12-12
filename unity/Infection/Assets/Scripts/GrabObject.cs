@@ -16,10 +16,14 @@ public class GrabObject : Movement, IGrabable
             col.enabled = true;
     }
 
-    public override void Die()
+    public override void Die(bool ignoreSpawn)
     {
         if (PlayerInputController.instance.HoldingObject == this)
             PlayerMovement.instance.clawAttack.Drop();
-        base.Die();
+        base.Die(ignoreSpawn);
+    }
+    public bool CanGrab()
+    {
+        return true;
     }
 }

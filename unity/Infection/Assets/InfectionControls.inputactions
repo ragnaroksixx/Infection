@@ -261,17 +261,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b2915ff5-c79a-4436-bf4c-4895a5231912",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FastFall",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "30c6fa46-04a4-4fee-bfdc-24a45c6032e0",
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",

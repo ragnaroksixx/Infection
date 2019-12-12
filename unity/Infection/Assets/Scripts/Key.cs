@@ -20,7 +20,7 @@ public class Key : MonoBehaviour
         {
             d.Unlock();
             d.Open();
-            self.Die();
+            self.Die(false);
         }
     }
 }

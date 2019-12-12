@@ -289,6 +289,6 @@ public class ClawAttack : Attack
 
     public bool CanGrabObject(Movement m)
     {
-        return m is IGrabable;
+        return m is IGrabable && (m as IGrabable).CanGrab();
     }
 }

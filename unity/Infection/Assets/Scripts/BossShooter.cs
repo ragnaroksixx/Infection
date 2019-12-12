@@ -11,12 +11,13 @@ public class BossShooter : MonoBehaviour
     public float spinSpeed, shootSpeed;
     public float timeBtwShoots;
     float timeTrack;
-    private void Start()
+    private void Awake()
     {
         Stop();
     }
     public void StartShooting()
     {
+        shotSource.parent.localEulerAngles = Vector3.zero;
         enabled = true;
     }
     public void Stop()
