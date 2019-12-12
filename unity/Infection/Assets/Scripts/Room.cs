@@ -20,12 +20,12 @@ public class Room : MonoBehaviour
         {
             Debug.LogError("No Id set", this.gameObject);
         }
-        spawnPoint = transform.Find("Spawn");
+        spawnPoint = transform.Find("RoomStuff").Find("Spawn");
         if (spawnPoint == null)
         {
             Debug.LogError("No Spawn found", this.gameObject);
         }
-        vCam = GetComponentInChildren<CinemachineVirtualCamera>();
+        vCam = transform.Find("RoomStuff").GetComponentInChildren<CinemachineVirtualCamera>();
         if (vCam.Follow == null)
         {
             vCam.Follow = CameraTarget.Instance.transform;

@@ -8,8 +8,8 @@ using Cinemachine;
 public class Door : MonoBehaviour
 {
     static List<Door> allDoors = new List<Door>();
-    public Vector3 closePos = new Vector3(-1, 0, 0);
-    public Vector3 openPos = new Vector3(-1, 1f, 0);
+    Vector3 closePos = new Vector3(0, 0, 0);
+    public Vector3 openPos = new Vector3(0, 0, -3);
     float speed = 0.25f;
     public bool isLocked { get => lockId != -1; }
     public CinemachineVirtualCamera VCam { get => vCam; set => vCam = value; }
