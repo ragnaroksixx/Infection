@@ -16,8 +16,12 @@ public class PlayerInputController : InputController
     }
     public override void SetInput(Movement m)
     {
-        if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && !canRelease)
+        if (!m.IsSimulated && !m.isRecoiling && !canRelease)
         {
+            if (m.IsAttacking() && m.isGrounded)
+            {
+                return;
+            }
             if (InputHandler.IsMovingLeft())
             {
                 m.input.x -= 1;

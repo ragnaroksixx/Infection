@@ -148,7 +148,8 @@ public class Attack : MonoBehaviour
     }
     public virtual void OnAttackStartUp()
     {
-        self.SimulateInput(new Vector2(self.isFacingRight ? 1 : -1, 0));
+        if (self.isGrounded)
+            self.SimulateInput(new Vector2(self.isFacingRight ? 1 : -1, 0));
     }
 
     public virtual void OnStartUpUpdate()

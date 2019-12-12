@@ -12,6 +12,8 @@ public class Room : MonoBehaviour
     Transform spawnPoint;
     Spawner[] spawners;
     CleanPoints points;
+    public AudioClip overrideBGM;
+
     public virtual void Start()
     {
         if (id == -1)
@@ -24,7 +26,7 @@ public class Room : MonoBehaviour
             Debug.LogError("No Spawn found", this.gameObject);
         }
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
-        if(vCam.Follow==null)
+        if (vCam.Follow == null)
         {
             vCam.Follow = CameraTarget.Instance.transform;
         }
@@ -66,6 +68,7 @@ public class Room : MonoBehaviour
             Cleaner.instance.Stop();
         }
         vCam.Priority = focusPriority;
+        AudioManager.SetBgm(overrideBGM);
         playerRoom = this;
         SaveLoad.Save(this);
     }
