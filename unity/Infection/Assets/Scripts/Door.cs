@@ -17,6 +17,7 @@ public class Door : MonoBehaviour
     public int lockId = -1;
     public KeyType keyType;
     CinemachineVirtualCamera vCam;
+    public AudioClip open, locked;
     private void Awake()
     {
         allDoors.Add(this);
@@ -39,8 +40,10 @@ public class Door : MonoBehaviour
     {
         if (isLocked && !ignoreLock)
         {
+            AudioManager.Play(locked, transform.position);
             return;
         }
+        AudioManager.Play(open, transform.position);
         transform.DOLocalMove(openPos, speed).SetDelay(0.25f);
     }
 

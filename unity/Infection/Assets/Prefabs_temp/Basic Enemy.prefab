@@ -336,6 +336,9 @@ MonoBehaviour:
   attacks: []
   maxHP: 4
   targetPriority: 1
+  jumpSFX: {fileID: 0}
+  hitSFX: {fileID: 0}
+  dieSFX: {fileID: 8300000, guid: 0a5e941a13636024fb23fe59037ad5a2, type: 3}
 --- !u!1 &8653612028295444280
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class CorruptAttack : Attack
         else
         {
             //base.ApplyAttackEffects(target);
+            AudioManager.Play(sfx, self.transform.position);
             PlayerInputController.instance.OnCorrupt(target);
             self.SetController(null);
             target.SetController(playerController);

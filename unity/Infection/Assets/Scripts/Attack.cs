@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
         }
     }
     public string attackTrigger;
-
+    public AudioClip sfx;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -68,6 +68,7 @@ public class Attack : MonoBehaviour
             self.anim.SetBool("skip", false);
             self.anim.SetTrigger(attackTrigger);
         }
+        AudioManager.Play(sfx, self.transform.position);
     }
     public virtual void EndAttack()
     {

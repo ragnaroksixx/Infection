@@ -21,9 +21,11 @@ public class AudioManager : MonoBehaviour
         Instance.bgm.clip = ac;
         Instance.bgm.Play();
     }
-    public static void Play(AudioClip ac)
+    public static void Play(AudioClip ac, Vector3 pos)
     {
+        if (ac == null) return;
         AudioSource a = Instance.audioPool.Pop();
+        a.transform.position = pos;
         a.clip = ac;
         a.Play();
     }

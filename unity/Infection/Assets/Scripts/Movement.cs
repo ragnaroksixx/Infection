@@ -57,6 +57,8 @@ public class Movement : MonoBehaviour
     public int maxHP;
     Health health;
     public int targetPriority;
+    public AudioClip jumpSFX, hitSFX, dieSFX;
+
     public void SetAttacks(params Attack[] atks)
     {
         attacks = atks;
@@ -224,6 +226,7 @@ public class Movement : MonoBehaviour
         jumpTrack--;
         if (anim)
             anim.SetTrigger("jump");
+        AudioManager.Play(jumpSFX, transform.position);
     }
 
     public virtual void OnDrawGizmosSelected()
@@ -241,6 +244,10 @@ public class Movement : MonoBehaviour
         if (health.currentHP <= 0)
         {
             Die();
+        }
+        else
+        {
+            AudioManager.Play(hitSFX, transform.position);
         }
         InterruptAttack();
     }
@@ -274,6 +281,7 @@ public class Movement : MonoBehaviour
     public virtual void Die()
     {
         Destroy(this.gameObject);
+        AudioManager.Play(dieSFX, transform.position);
     }
     RigidbodyConstraints defaultConstraints;
     public void FreezeRBody()
