@@ -14,7 +14,7 @@ public class Patrol : EnemyMovement
 
         if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && (m.isGrounded))
         {
-            if (Physics.Raycast(groundDetection.transform.position, Vector2.down, .2f, layer))
+            if (!Physics.Raycast(groundDetection.transform.position, Vector2.down, .2f, layer))
             {
                 m.FaceDirection(!m.isFacingRight);
             }
