@@ -20,4 +20,9 @@ public class BossRoom : Room
         Vector3 pos = val ? upPos : downPos;
         safeFloor.DOLocalMove(pos, floorSpeed);
     }
+    public override void Enter()
+    {
+        base.Enter();
+        UIHacks.Instance.SetBoss(true);
+    }
 }

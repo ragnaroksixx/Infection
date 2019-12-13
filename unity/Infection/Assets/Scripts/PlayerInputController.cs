@@ -109,12 +109,17 @@ public class PlayerInputController : InputController
     }
     public void ReleasCorruption()
     {
+        corruptingEnemy.ui = null;
         corruptingEnemy = null;
         originalPlayer.SetController(this);
+        UIHacks.Instance.SetCorruptable(false);
     }
     public void OnCorrupt(Movement m)
     {
         canRelease = false;
         corruptingEnemy = m;
+        corruptingEnemy.ui = UIHacks.Instance.corrupt;
+        UIHacks.Instance.corrupt.UpdateUI(corruptingEnemy.Health);
+        UIHacks.Instance.SetCorruptable(true);
     }
 }

@@ -13,7 +13,7 @@ public static class SaveLoad
     {
         PlayerPrefs.DeleteAll();
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 0);
-        spawnRoom = 1;
+        spawnRoom = 0;
     }
     public static void Save(Room r)
     {
@@ -32,5 +32,22 @@ public static class SaveLoad
     public static void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public static void Collect(Collectible c)
+    {
+        PlayerPrefs.SetInt(c.idTag, 0);
+        PlayerPrefs.Save();
+    }
+    public static bool HasCollectible(string c)
+    {
+        return PlayerPrefs.HasKey(c);
+    }
+    public static int GetMaxHP()
+    {
+        return PlayerPrefs.GetInt("hp", 3);
+    }
+    public static void IncreaseMaxHP()
+    {
+        PlayerPrefs.SetInt("hp", GetMaxHP() + 1);
     }
 }

@@ -26,5 +26,11 @@ public class Health
     {
         currentHP -= amt;
     }
+
+    public virtual void IncreaseMaxHP(int amt)
+    {
+        maxHP += amt;
+        GainHP(amt);
+    }
 }
 

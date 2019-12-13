@@ -60,6 +60,8 @@ public class Movement : MonoBehaviour
     public int targetPriority;
     public AudioClip jumpSFX, hitSFX, dieSFX;
     Spawner spawn;
+    DamagedFlasher flasher;
+    public HealthUI ui;
     public void SetAttacks(params Attack[] atks)
     {
         attacks = atks;
@@ -67,8 +69,11 @@ public class Movement : MonoBehaviour
     public virtual void Awake()
     {
         rBody = GetComponent<Rigidbody>();
+        flasher = GetComponentInChildren<DamagedFlasher>();
         defaultConstraints = RBody.constraints;
         health = new Health(maxHP);
+        if (ui)
+            ui.UpdateUI(health);
     }
     public virtual void Start()
     {
@@ -242,6 +247,8 @@ public class Movement : MonoBehaviour
         recoilTrack = Time.time + stunTime;
         zeroRecoilTrack = recoilTrack + zeroVelocityTime;
         health.LoseHP(damage);
+        if (ui)
+            ui.UpdateUI(health);
         if (health.currentHP <= 0)
         {
             Die();
@@ -249,6 +256,10 @@ public class Movement : MonoBehaviour
         else
         {
             AudioManager.Play(hitSFX, transform.position);
+            if (flasher && damage > 0)
+            {
+                flasher.Flash(stunTime + zeroVelocityTime);
+            }
         }
         InterruptAttack();
     }

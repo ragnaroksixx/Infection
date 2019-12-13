@@ -383,7 +383,12 @@ MonoBehaviour:
   jumpSFX: {fileID: 0}
   hitSFX: {fileID: 0}
   dieSFX: {fileID: 8300000, guid: 0a5e941a13636024fb23fe59037ad5a2, type: 3}
-  cols: []
+  explosionPrefab: {fileID: 2025616576784932609, guid: 9b1d2124ca369924e86a608c084e0e7f,
+    type: 3}
+  cols:
+  - {fileID: 8653612027531276992}
+  - {fileID: 8653612028295444286}
+  - {fileID: 8653612026371754072}
 --- !u!114 &2217874569489703350
 MonoBehaviour:
   m_ObjectHideFlags: 0

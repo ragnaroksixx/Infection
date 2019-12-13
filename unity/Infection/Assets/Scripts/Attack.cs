@@ -137,7 +137,6 @@ public class Attack : MonoBehaviour
         {
             ApplyAttackEffects(m);
         }
-
     }
     public virtual void ApplyAttackEffects(Movement target)
     {

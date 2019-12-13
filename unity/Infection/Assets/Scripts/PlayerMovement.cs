@@ -34,6 +34,7 @@ public class PlayerMovement : Movement
     }
     public override void Awake()
     {
+        maxHP = SaveLoad.GetMaxHP();
         base.Awake();
         instance = this;
         UseAttachedArm();

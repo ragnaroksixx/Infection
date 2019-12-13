@@ -11,7 +11,18 @@ public class Shield : MonoBehaviour
         transform.DOScale(size, 1.25f);
     }
 
-
+    public void TakeDamage()
+    {
+        HP--;
+        if (HP <= 0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
     private void OnCollisionEnter(Collision collision)
     {
 

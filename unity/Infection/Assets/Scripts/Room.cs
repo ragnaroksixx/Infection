@@ -49,7 +49,7 @@ public class Room : MonoBehaviour
         }
 
     }
-    public void Enter()
+    public virtual void Enter()
     {
         if (playerRoom)
         {

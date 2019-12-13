@@ -30,21 +30,25 @@ public class Spawner : MonoBehaviour
         Spawn(cacheRoom);
     }
     Room cacheRoom;
-    public void Spawn(Room r)
+    public virtual GameObject Spawn(Room r)
     {
         cacheRoom = r;
-        instance = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity).GetComponent<Movement>();
-        instance.Spawn = this;
-        EnemyMovement em = instance.GetComponent<EnemyMovement>();
+        GameObject obj;
+        obj = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+        instance = obj.GetComponent<Movement>();
+        if (instance)
+            instance.Spawn = this;
+        EnemyMovement em = obj.GetComponent<EnemyMovement>();
         if (em)
             em.room = r;
 
-        Key key = instance.GetComponentInChildren<Key>();
+        Key key = obj.GetComponentInChildren<Key>();
         if (key)
         {
             key.type = keyType;
             key.Init();
         }
+        return obj;
 
     }
 }
