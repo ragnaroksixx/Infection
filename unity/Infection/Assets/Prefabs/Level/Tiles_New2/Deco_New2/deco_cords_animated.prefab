@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4959089523532242251}
   - component: {fileID: 3051252949210935345}
   m_Layer: 0
-  m_Name: deco_cables_animated
+  m_Name: deco_cords_animated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8253233883665330008}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -53.96, y: 8.17, z: 50.79}
+  m_LocalPosition: {x: -53.96, y: 0, z: 50.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2865525387613730196}
