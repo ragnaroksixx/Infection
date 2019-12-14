@@ -13,7 +13,7 @@ public static class SaveLoad
     {
         PlayerPrefs.DeleteAll();
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 0);
-        spawnRoom = 1;
+        spawnRoom = 99;
     }
     public static void Save(Room r)
     {

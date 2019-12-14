@@ -300,6 +300,7 @@ MonoBehaviour:
   mesh: {fileID: 3262385202511597936}
   nextAttack: {fileID: 0}
   key: 325
+  controllerkey: 323
   stunTime: 0
   stunTimeZero: 0
   isGroundAttack: 1
@@ -949,7 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes:
   - {fileID: 1964969100230051880}
-  flashColor: {r: 0.41738117, g: 1, b: 0, a: 1}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &5947662714481739898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1586,7 @@ MonoBehaviour:
   jumpSFX: {fileID: 8300000, guid: 8bbcd52024018514bb6b3ad77318db83, type: 3}
   hitSFX: {fileID: 8300000, guid: 29af932066e487a4d8980bf9e9b58f66, type: 3}
   dieSFX: {fileID: 8300000, guid: a1ad79a68bd7f0e43ac3c0a00fd5528b, type: 3}
+  ui: {fileID: 0}
   meleeAttack: {fileID: 4226437564805666408}
   ariealAttack: {fileID: 4044692371334869374}
   clawAttack: {fileID: 8258637859632515162}
@@ -1679,6 +1681,7 @@ MonoBehaviour:
   mesh: {fileID: 8258637861389638714}
   nextAttack: {fileID: 4044692371353018958}
   key: 324
+  controllerkey: 323
   stunTime: 0.1
   stunTimeZero: 0.2
   isGroundAttack: 1

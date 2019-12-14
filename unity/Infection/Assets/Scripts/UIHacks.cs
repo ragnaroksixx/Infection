@@ -28,5 +28,9 @@ public class UIHacks : MonoBehaviour
     {
         boss.gameObject.SetActive(value);
     }
+    public void SetMinimap(bool value)
+    {
+        miniMap.gameObject.SetActive(value);
+    }
 }
 
