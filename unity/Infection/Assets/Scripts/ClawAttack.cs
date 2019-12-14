@@ -136,7 +136,7 @@ public class ClawAttack : Attack
         base.OnEndLagUpdate();
         if (isPullingObject)
         {
-            if (CanTarget(target, grabRange) && Input.GetKey(key) && CanGrabObject(target))
+            if (CanTarget(target, grabRange) && KeyDown() && CanGrabObject(target))
             {
                 EndAttack();
                 Grab(target);

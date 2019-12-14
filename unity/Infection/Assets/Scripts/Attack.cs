@@ -16,6 +16,7 @@ public class Attack : MonoBehaviour
     public Attack nextAttack;
     protected bool doNextCombo;
     public KeyCode key = KeyCode.Mouse0;
+    public KeyCode controllerkey = KeyCode.Mouse0;
     public enum AttackState
     {
         None,
@@ -119,7 +120,7 @@ public class Attack : MonoBehaviour
                 break;
             }
 
-            if (nextAttack != null && Input.GetKeyDown(nextAttack.key) && time > startUpLag)
+            if (nextAttack != null && nextAttack.KeyDown() && time > startUpLag)
             {
                 doNextCombo = true;
             }
@@ -194,5 +195,14 @@ public class Attack : MonoBehaviour
         }
         if (nextAttack)
             nextAttack.InterruptAttack();
+    }
+
+    public bool KeyDown()
+    {
+        return Input.GetKeyDown(key) || Input.GetKeyDown(controllerkey);
+    }
+    public bool KeyUp()
+    {
+        return Input.GetKeyUp(key) || Input.GetKeyUp(controllerkey);
     }
 }

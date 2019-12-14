@@ -41,7 +41,7 @@ public class PlayerInputController : InputController
             {
                 if (!attack.CanAttack()) continue;
                 if ((attack.isGroundAttack && m.isGrounded || attack.isAirAttack && !m.isGrounded) &&
-                    Input.GetKeyDown(attack.key))
+                    attack.KeyDown())
                 {
                     attack.StartAttack();
                     break;
@@ -78,14 +78,14 @@ public class PlayerInputController : InputController
         base.Update();
         if (IsCorrupting)
         {
-            if (!canRelease && Input.GetKeyDown(originalPlayer.corruptAttack.key))
+            if (!canRelease && originalPlayer.corruptAttack.KeyDown())
             {
                 canRelease = true;
                 absorbTimeTrack = 0;
             }
             if (canRelease)
             {
-                if (Input.GetKeyUp(originalPlayer.corruptAttack.key) || absorbTimeTrack >= absorbTime)
+                if (originalPlayer.corruptAttack.KeyUp() || absorbTimeTrack >= absorbTime)
                 {
                     canRelease = false;
                     if (absorbTimeTrack < absorbTime)
