@@ -62,9 +62,10 @@ public class Movement : MonoBehaviour
     Spawner spawn;
     DamagedFlasher flasher;
     public HealthUI ui;
+    float maxFallVelocity = 15;
     public void SetAttacks(params Attack[] atks)
     {
-        attacks = atks;
+        attacks = atks; 
     }
     public virtual void Awake()
     {
@@ -83,6 +84,14 @@ public class Movement : MonoBehaviour
     public virtual void Update()
     {
         OnUpdate();
+    }
+    public virtual void FixedUpdate()
+    {
+        float fallVel = rBody.velocity.y;
+        Vector3 vec = rBody.velocity;
+        fallVel = Mathf.Max(fallVel, -maxFallVelocity);
+        vec.y = fallVel;
+        rBody.velocity = vec;
     }
     public virtual void DetermineInput()
     {

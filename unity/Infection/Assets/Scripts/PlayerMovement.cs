@@ -30,7 +30,7 @@ public class PlayerMovement : Movement
     }
     public override void DetermineInput()
     {
-        base.DetermineInput();
+        base.DetermineInput(); 
     }
     public override void Awake()
     {
@@ -45,12 +45,14 @@ public class PlayerMovement : Movement
         base.Update();
 
     }
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (PlayerInputController.instance.IsCorrupting)
         {
             transform.position = PlayerInputController.instance.CorruptingEnemy.transform.position;
         }
+        else
+            base.FixedUpdate();
     }
     public override bool IsAttacking()
     {

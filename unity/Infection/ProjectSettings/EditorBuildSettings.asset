@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene_jerome 1.unity
-    guid: c440ff466b5efa547bf36bdb80200f6c
+    path: Assets/Scenes/Level_01.unity
+    guid: fb279d2bbf6c7c94098c696abf9dd44d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f2207f7a53016b44f9c2ef989ab09b32,
       type: 2}

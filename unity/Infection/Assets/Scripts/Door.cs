@@ -43,7 +43,8 @@ public class Door : MonoBehaviour
             AudioManager.Play(locked, transform.position);
             return;
         }
-        AudioManager.Play(open, transform.position);
+        if (!ignoreLock)
+            AudioManager.Play(open, transform.position);
         transform.DOLocalMove(openPos, speed).SetDelay(0.25f);
     }
 

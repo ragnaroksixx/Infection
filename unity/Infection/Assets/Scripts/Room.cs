@@ -67,6 +67,7 @@ public class Room : MonoBehaviour
         {
             Cleaner.instance.Stop();
         }
+        TileTracker.SetTile(id);
         vCam.Priority = focusPriority;
         AudioManager.SetBgm(overrideBGM);
         playerRoom = this;

@@ -6,6 +6,7 @@ using UnityEngine;
 public class UIHacks : MonoBehaviour
 {
     public HealthUI player, corrupt, boss;
+    public GameObject miniMap;
     public static UIHacks Instance;
     private void Awake()
     {
