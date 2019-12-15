@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idTag: 
+  render: {fileID: 3299747004219082211}
 --- !u!1001 &470655502974756979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,6 +87,12 @@ PrefabInstance:
 --- !u!1 &8092688440730633316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8558840322531814423, guid: 70d504b128c4381449ff635cfb3a9bc7,
+    type: 3}
+  m_PrefabInstance: {fileID: 470655502974756979}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &3299747004219082211 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3117358204775296400, guid: 70d504b128c4381449ff635cfb3a9bc7,
     type: 3}
   m_PrefabInstance: {fileID: 470655502974756979}
   m_PrefabAsset: {fileID: 0}
