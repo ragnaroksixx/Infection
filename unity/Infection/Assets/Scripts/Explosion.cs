@@ -29,13 +29,14 @@ public class Explosion : MonoBehaviour
         else
         {
             Movement m = other.GetComponentInParent<Movement>();
-            if (m is PlayerMovement && m.isRecoiling) return;
+            if (m is PlayerMovement) return;
             ApplyAttackEffects(m);
         }
 
     }
     public virtual void ApplyAttackEffects(Movement target)
     {
+        if (target == null) return;
         Vector3 result = target.transform.position - transform.position;
         result.Normalize();
         result *= expolsiveforce;

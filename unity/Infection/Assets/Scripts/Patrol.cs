@@ -22,7 +22,6 @@ public class Patrol : EnemyMovement
 
             if (Physics.Raycast(fwdDetection.transform.position, transform.right, out hit, .2f, layer))
             {
-                Debug.LogWarning(hit.transform.gameObject);
                 m.FaceDirection(!m.isFacingRight);
             }
 

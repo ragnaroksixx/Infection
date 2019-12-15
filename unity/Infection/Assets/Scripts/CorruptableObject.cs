@@ -6,7 +6,7 @@ using UnityEngine;
 public class CorruptableObject : Movement, ICorruptable, IGrabable
 {
     public Explosion explosionPrefab;
-
+    public GameObject effects;
     public override void Die(bool ignoreSpawn)
     {
         if (PlayerInputController.instance.CorruptingEnemy == this)
@@ -32,6 +32,12 @@ public class CorruptableObject : Movement, ICorruptable, IGrabable
     public bool CanGrab()
     {
         return Health.currentHP <= 1;
+    }
+    public override void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime, int damage)
+    {
+        base.HitCharacter(dir, stunTime, zeroVelocityTime, damage);
+        if (CanGrab() && !effects.activeInHierarchy)
+            effects.SetActive(true);
     }
     bool destroyOnTouch;
     public void OnCollisionEnter(Collision collision)

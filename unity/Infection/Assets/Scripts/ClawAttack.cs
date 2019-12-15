@@ -58,16 +58,13 @@ public class ClawAttack : Attack
             {
                 Grab(target);
             }
-            else if (SaveLoad.hasClaw)
+            else
             {
                 target = AutoTarget(range);
                 AudioManager.Play(sfx, self.transform.position);
                 base.StartAttack();
             }
-            else
-            {
-                InterruptAttack();
-            }
+
         }
     }
     public override void OnAttackStartUp()
@@ -132,7 +129,7 @@ public class ClawAttack : Attack
                 isPullingObject = true;
                 target.HitCharacter(targetRotFwd, pullDuration, stunTimeZero, 0);
             }
-            else
+            else if (SaveLoad.hasClaw)
             {
                 isPullingSelf = true;
                 PullSelf(target);
@@ -155,17 +152,20 @@ public class ClawAttack : Attack
             // self.SimulateInput(pullDir);
         }
     }
-    public float pullStrength = 1;
-    public float minPull, maxPull;
+    float pullStrength = 20;
+    float minPull = 10, maxPull = 15;
     public void PullSelf(Movement target)
     {
         pullDir = -self.transform.position + target.transform.position;
         //pullDir.y = 0;
         pullDir.z = 0;
-        //pullDir.Normalize();
+        pullDir.Normalize();
         pullDir *= pullStrength;
-        pullDir.x = Mathf.Sign(pullDir.x) * Mathf.Clamp(Mathf.Abs(pullDir.x), minPull, maxPull);
-        pullDir.y = Mathf.Sign(pullDir.y) * Mathf.Clamp(Mathf.Abs(pullDir.y), minPull, maxPull);
+        //pullDir.x = Mathf.Sign(pullDir.x) * Mathf.Clamp(Mathf.Abs(pullDir.x), minPull, maxPull);
+        //pullDir.y = Mathf.Sign(pullDir.y) * Mathf.Clamp(Mathf.Abs(pullDir.y), minPull, maxPull);
+        PullOverride po = target.GetComponent<PullOverride>();
+        //if (po)
+        //    pullDir = po.dir;
         self.HitCharacter(pullDir, pullDuration, 0, 0);
     }
     public override void EndAttack()
@@ -204,6 +204,7 @@ public class ClawAttack : Attack
             if (dist <= closest || (result && m.targetPriority > result.targetPriority))
             {
                 if (m.targetPriority < 0) continue;
+                if (!CanPullObject(m) && !SaveLoad.hasClaw) continue;
                 if (result && m.targetPriority < result.targetPriority) continue;
                 if (CanTarget(m, r))
                 {

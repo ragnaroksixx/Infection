@@ -8,10 +8,12 @@ public class EnemyHitbox : MonoBehaviour
     public float recoilTime = 0.5f;
     public float zeroRecoilTime = 0.2f;
     public int damage = 1;
+    Patrol patrol;
     // Use this for initialization
     void Start()
     {
         self = GetComponentInParent<Movement>();
+        patrol = GetComponentInParent<Patrol>();
     }
 
     private void OnTriggerEnter(Collider other)
