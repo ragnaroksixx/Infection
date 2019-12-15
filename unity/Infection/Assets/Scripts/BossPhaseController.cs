@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using DG.Tweening;
 
 public class BossPhaseController : MonoBehaviour
 {
@@ -25,9 +25,15 @@ public class BossPhaseController : MonoBehaviour
     Shield shieldInstance;
     public int numPhases = 4;
     public GameObject[] grapplePoints;
+    public Transform shieldGraphic;
+
     private void Start()
     {
-        StartBattle();
+        foreach (Spawner item in spawners)
+        {
+            item.reSpawnOnDie = false;
+            item.Kill();
+        }
     }
     public void StartBattle()
     {
@@ -76,6 +82,7 @@ public class BossPhaseController : MonoBehaviour
     }
     public void StartPhase(Phase p)
     {
+        boss.isInvincible = false;
         switch (p)
         {
             case Phase.NONE:
@@ -101,7 +108,9 @@ public class BossPhaseController : MonoBehaviour
                     g.SetActive(false);
                 }
                 shieldInstance = GameObject.Instantiate(shieldPrefab, transform.position, Quaternion.identity);
-                shieldInstance.Init(new Vector3(10, 6, 3));
+                shieldInstance.Init(new Vector3(15, 6, 3));
+                boss.isInvincible = true;
+                shieldGraphic.DOLocalMove(new Vector3(0, 0, -.5f), 0.5f);
                 break;
             case Phase.DEAD:
                 break;
@@ -126,6 +135,7 @@ public class BossPhaseController : MonoBehaviour
                     item.reSpawnOnDie = false;
                     item.Kill();
                 }
+                shieldGraphic.DOLocalMove(new Vector3(0, 5, -.5f), 0.5f);
                 break;
             case Phase.DEAD:
                 break;

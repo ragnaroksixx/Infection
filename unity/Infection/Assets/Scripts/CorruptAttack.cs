@@ -39,7 +39,7 @@ public class CorruptAttack : Attack
             PlayerInputController.instance.OnCorrupt(target);
             self.SetController(null);
             target.SetController(playerController);
-            target.isRecoiling = false;
+            target.StopRecoil();
             EndAttack();
         }
         //Room.SetCameraTarget(target.transform);

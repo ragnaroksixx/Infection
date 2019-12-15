@@ -63,9 +63,10 @@ public class Movement : MonoBehaviour
     DamagedFlasher flasher;
     public HealthUI ui;
     float maxFallVelocity = 15;
+    public bool isInvincible;
     public void SetAttacks(params Attack[] atks)
     {
-        attacks = atks; 
+        attacks = atks;
     }
     public virtual void Awake()
     {
@@ -133,7 +134,7 @@ public class Movement : MonoBehaviour
         {
             if (Time.time > zeroRecoilTrack)
             {
-                isRecoiling = false;
+                StopRecoil();
             }
             SetVelocity(input, 1, false);
         }
@@ -170,6 +171,10 @@ public class Movement : MonoBehaviour
         else if (controller)
             controller.SetAttacks(this);
 
+    }
+    public virtual void StopRecoil()
+    {
+        isRecoiling = false;
     }
     public virtual void SetController(InputController ic)
     {
@@ -255,6 +260,7 @@ public class Movement : MonoBehaviour
         recoilDir = dir;
         recoilTrack = Time.time + stunTime;
         zeroRecoilTrack = recoilTrack + zeroVelocityTime;
+        if (damage != 0 && isInvincible) return;
         health.LoseHP(damage);
         if (ui)
             ui.UpdateUI(health);
@@ -267,7 +273,7 @@ public class Movement : MonoBehaviour
             AudioManager.Play(hitSFX, transform.position);
             if (flasher && damage > 0)
             {
-                flasher.Flash(stunTime + zeroVelocityTime);
+                flasher.Flash(.75f);
             }
         }
         InterruptAttack();

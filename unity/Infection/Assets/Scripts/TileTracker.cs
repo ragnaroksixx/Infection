@@ -9,7 +9,7 @@ public class TileTracker : MonoBehaviour
     public static int currentTile = -1;
     private void OnTriggerEnter(Collider other)
     {
-        SetTile(currentTile);
+        SetTile(id);
     }
     private void OnDestroy()
     {

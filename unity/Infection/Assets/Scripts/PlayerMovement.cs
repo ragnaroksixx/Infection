@@ -30,7 +30,7 @@ public class PlayerMovement : Movement
     }
     public override void DetermineInput()
     {
-        base.DetermineInput(); 
+        base.DetermineInput();
     }
     public override void Awake()
     {
@@ -70,7 +70,11 @@ public class PlayerMovement : Movement
         graphic.gameObject.SetActive(true);
         UnFreezeRBody();
     }
-
+    public override void StopRecoil()
+    {
+        base.StopRecoil();
+        isInvincible = false;
+    }
     public override void Die(bool ignoreSpawn)
     {
         SaveLoad.ReloadScene();
@@ -88,5 +92,12 @@ public class PlayerMovement : Movement
         skinnedMesh.sharedMesh = wArm;
         holdArm.SetActive(false);
         grabArm.SetActive(false);
+    }
+
+    public override void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime, int damage)
+    {
+        base.HitCharacter(dir, stunTime, zeroVelocityTime, damage);
+        if (damage != 0)
+            isInvincible = true;
     }
 }

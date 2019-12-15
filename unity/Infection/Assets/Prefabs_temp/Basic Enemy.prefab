@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2437981435661922347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3578965959832064483}
+  - component: {fileID: 128351843683575337}
+  m_Layer: 0
+  m_Name: Flasher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3578965959832064483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2437981435661922347}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_Children: []
+  m_Father: {fileID: 8653612027854618690}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128351843683575337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2437981435661922347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104be086748b1484fb57d0007ce00b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes:
+  - {fileID: 2467833929286968681}
+  - {fileID: 5046656140006335754}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3779470711271861569
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +362,7 @@ Transform:
   m_GameObject: {fileID: 8653612027854618703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.32, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 8653612027600814794}
   - {fileID: 8653612027037553440}
@@ -325,6 +372,7 @@ Transform:
   - {fileID: 3263786676561346363}
   - {fileID: 262727910444197815}
   - {fileID: 5222746938909756620}
+  - {fileID: 3578965959832064483}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -383,6 +431,8 @@ MonoBehaviour:
   jumpSFX: {fileID: 0}
   hitSFX: {fileID: 0}
   dieSFX: {fileID: 8300000, guid: 0a5e941a13636024fb23fe59037ad5a2, type: 3}
+  ui: {fileID: 0}
+  isInvincible: 0
   explosionPrefab: {fileID: 2025616576784932609, guid: 9b1d2124ca369924e86a608c084e0e7f,
     type: 3}
   cols:
@@ -533,11 +583,28 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 5a06f77c6daa8234fbfda7d7c0605aa2,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e113a1559ded723458f4c50e76bf80cd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a06f77c6daa8234fbfda7d7c0605aa2, type: 3}
+--- !u!23 &5046656140006335754 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3330600470385389867, guid: 5a06f77c6daa8234fbfda7d7c0605aa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7508055274499789857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3263786676561346363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 5a06f77c6daa8234fbfda7d7c0605aa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7508055274499789857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2467833929286968681 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5336336319557710152, guid: 5a06f77c6daa8234fbfda7d7c0605aa2,
     type: 3}
   m_PrefabInstance: {fileID: 7508055274499789857}
   m_PrefabAsset: {fileID: 0}

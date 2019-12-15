@@ -25,5 +25,6 @@ public class BossRoom : Room
         base.Enter();
         UIHacks.Instance.SetBoss(true);
         UIHacks.Instance.SetMinimap(false);
+        GetComponentInChildren<BossPhaseController>().StartBattle();
     }
 }
