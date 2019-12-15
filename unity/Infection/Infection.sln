@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7540CF3F-D6F4-C4E1-0051-EEB6E17BB119}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer", "Sirenix.OdinInspector.CompatibilityLayer.csproj", "{D56F2560-1731-5D3C-8129-12366CE53AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer.Editor", "Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj", "{A7FF7602-D863-5133-667D-7C923DE7FB92}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{DF0A67FC-1C36-C014-36FF-D80407D0A7F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.CompatibilityLayer.Editor", "Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj", "{A7FF7602-D863-5133-667D-7C923DE7FB92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{D56F2560-1731-5D3C-8129-12366CE53AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56F2560-1731-5D3C-8129-12366CE53AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56F2560-1731-5D3C-8129-12366CE53AD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF0A67FC-1C36-C014-36FF-D80407D0A7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF0A67FC-1C36-C014-36FF-D80407D0A7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0A67FC-1C36-C014-36FF-D80407D0A7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF0A67FC-1C36-C014-36FF-D80407D0A7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FF7602-D863-5133-667D-7C923DE7FB92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
