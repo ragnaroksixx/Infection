@@ -302,8 +302,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.90000004, y: 0.70783085, z: 1}
+  m_Center: {x: 0, y: -0.14608459, z: 0}
 --- !u!1 &8653612027600814805
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ Transform:
   m_GameObject: {fileID: 8653612027854618703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.32, y: 1, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8653612027600814794}
   - {fileID: 8653612027037553440}
@@ -424,7 +424,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   fastFallMult: 8
   controller: {fileID: 2217874569489703350}
-  maxJumps: 1
+  numAirJumps: 0
   attacks: []
   maxHP: 4
   targetPriority: 1
@@ -456,7 +456,7 @@ MonoBehaviour:
   fwdDetection: {fileID: 5222746938909756620}
   layer:
     serializedVersion: 2
-    m_Bits: 524087
+    m_Bits: 507191
 --- !u!1 &8653612028295444280
 GameObject:
   m_ObjectHideFlags: 0

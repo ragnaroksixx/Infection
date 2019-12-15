@@ -6,13 +6,15 @@ public class Room : MonoBehaviour
 {
     public const int focusPriority = 1;
     public const int unFocusPriority = 0;
-    CinemachineVirtualCamera vCam;
+    protected CinemachineVirtualCamera vCam;
     public static Room playerRoom;
     public int id = -1;
     Transform spawnPoint;
-    Spawner[] spawners;
-    CleanPoints points;
+    protected Spawner[] spawners;
+    protected CleanPoints points;
     public AudioClip overrideBGM;
+
+    public Transform SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
     public virtual void Start()
     {
@@ -70,7 +72,7 @@ public class Room : MonoBehaviour
         vCam.Priority = focusPriority;
         AudioManager.SetBgm(overrideBGM);
         playerRoom = this;
-        SaveLoad.Save(this);
+
     }
 
     public void Exit()
@@ -84,6 +86,7 @@ public class Room : MonoBehaviour
         {
             Cleaner.instance.Stop();
         }
+        SaveLoad.Save(this);
     }
 
     public static void SetCameraTarget(Transform t)

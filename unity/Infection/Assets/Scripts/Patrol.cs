@@ -14,13 +14,15 @@ public class Patrol : EnemyMovement
 
         if (!m.IsSimulated && !m.isRecoiling && !m.IsAttacking() && (m.isGrounded))
         {
-            if (!Physics.Raycast(groundDetection.transform.position, Vector2.down, .2f, layer))
+            RaycastHit hit;
+            if (!Physics.Raycast(groundDetection.transform.position, Vector2.down, out hit, 1f, layer))
             {
                 m.FaceDirection(!m.isFacingRight);
             }
 
-            if (Physics.Raycast(fwdDetection.transform.position, transform.right, .2f, layer))
+            if (Physics.Raycast(fwdDetection.transform.position, transform.right, out hit, .2f, layer))
             {
+                Debug.LogWarning(hit.transform.gameObject);
                 m.FaceDirection(!m.isFacingRight);
             }
 

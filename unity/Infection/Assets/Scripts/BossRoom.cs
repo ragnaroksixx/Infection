@@ -22,7 +22,21 @@ public class BossRoom : Room
     }
     public override void Enter()
     {
-        base.Enter();
+        foreach (Spawner spawner in spawners)
+        {
+            spawner.Spawn(this);
+        }
+        if (points)
+        {
+            Cleaner.instance.Start(points);
+        }
+        else
+        {
+            Cleaner.instance.Stop();
+        }
+        vCam.Priority = focusPriority;
+        AudioManager.SetBgm(overrideBGM);
+        playerRoom = this;
         UIHacks.Instance.SetBoss(true);
         UIHacks.Instance.SetMinimap(false);
         GetComponentInChildren<BossPhaseController>().StartBattle();

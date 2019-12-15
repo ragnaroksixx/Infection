@@ -14,7 +14,8 @@ public class Collectible : MonoBehaviour
         PlayerMovement m = other.GetComponentInParent<PlayerMovement>();
         OnCollect();
         Destroy(this.gameObject);
-        CollectibleMenu.instance.SetVis(true, ui);
+        if (ui)
+            CollectibleMenu.instance.SetVis(true, ui);
 
     }
     public virtual void OnCollect()

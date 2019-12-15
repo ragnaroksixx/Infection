@@ -19,7 +19,7 @@ public static class SaveLoad
     {
         PlayerPrefs.DeleteAll();
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        spawnRoom = 1;
+        spawnRoom = 2;
     }
     public static void Save(Room r)
     {
@@ -37,6 +37,7 @@ public static class SaveLoad
     }
     public static void ReloadScene()
     {
+        Load();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public static void Collect(Collectible c)
@@ -48,7 +49,7 @@ public static class SaveLoad
 
     public static int NumAirJumps()
     {
-        return PlayerPrefs.HasKey("double jump") ? 1 : 0;
+        return PlayerPrefs.HasKey("double jump") || hasAll ? 1 : 0;
     }
 
     public static bool HasCollectible(string c)
@@ -63,11 +64,12 @@ public static class SaveLoad
     {
         PlayerPrefs.SetInt("hp", GetMaxHP() + 1);
     }
+    static bool hasAll = true;
     public static void UpdateCollectibles()
     {
-        hasGrab = HasCollectible("grab");
-        hasClaw = HasCollectible("claw");
-        hasCorruptAbility = HasCollectible("corrupt");
+        hasGrab = HasCollectible("grab") || hasAll;
+        hasClaw = HasCollectible("claw") || hasAll;
+        hasCorruptAbility = HasCollectible("corrupt") || hasAll;
         if (PlayerMovement.instance)
             PlayerMovement.instance.numAirJumps = SaveLoad.NumAirJumps();
     }

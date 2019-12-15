@@ -11,6 +11,7 @@ public class RoomTransition : MonoBehaviour
     public Collider col;
     Room currentRoom;
     Door d;
+    public bool skipToSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,8 @@ public class RoomTransition : MonoBehaviour
         dir.Normalize();
         //Disable player controls
         //Move player right until fade complete
-        pm.SimulateInput(dir);
+        if (!skipToSpawn)
+            pm.SimulateInput(dir);
         currentRoom.Exit();
 
         //Start Fade to black
@@ -57,7 +59,14 @@ public class RoomTransition : MonoBehaviour
         //Teleport player and camera to next Room
         pm.transform.position = entryStartPoint.position;
         currentRoom.Enter();
-        StartCoroutine(EndTransitionUpdate(pm));
+        if (skipToSpawn)
+        {
+            pm.transform.position = currentRoom.SpawnPoint.position;
+            ScreenFader.FadeFromBlack(fadeTime / 2, 0.25f, null);
+            EndTransition(pm);
+        }
+        else
+            StartCoroutine(EndTransitionUpdate(pm));
     }
     void EndTransition(PlayerMovement pm)
     {
@@ -83,7 +92,7 @@ public class RoomTransition : MonoBehaviour
         while (true)
         {
             float distance = Vector3.Distance(pm.transform.position, entryEndPoint.position);
-            if (distance <= 0.1f)
+            if (distance <= 0.2f)
             {
                 pm.SimulateInput(Vector3.zero);
                 yield return new WaitForSeconds(.5f);
