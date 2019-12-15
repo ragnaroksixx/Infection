@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     public KeyType keyType;
     public bool reSpawnOnDie;
     Coroutine co;
-    public void Kill()
+    public virtual void Kill()
     {
         if (co != null)
             StopCoroutine(co);

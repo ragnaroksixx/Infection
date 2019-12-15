@@ -17,9 +17,8 @@ public static class SaveLoad
     }
     public static void Load()
     {
-        PlayerPrefs.DeleteAll();
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        spawnRoom = 1;
+        //spawnRoom = 2;
     }
     public static void Save(Room r)
     {
@@ -72,5 +71,22 @@ public static class SaveLoad
         hasCorruptAbility = HasCollectible("corrupt") || hasAll;
         if (PlayerMovement.instance)
             PlayerMovement.instance.numAirJumps = SaveLoad.NumAirJumps();
+    }
+
+    public static void NewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        Load();
+        UpdateCollectibles();
+        SceneManager.LoadScene(1);
+    }
+
+    public static void Continue()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public static void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
