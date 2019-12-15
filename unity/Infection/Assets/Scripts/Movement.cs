@@ -49,6 +49,7 @@ public class Movement : MonoBehaviour
     public Health Health { get => health; set => health = value; }
     public Rigidbody RBody { get => rBody; }
     public Spawner Spawn { get => spawn; set => spawn = value; }
+    public DamagedFlasher Flasher { get => flasher; set => flasher = value; }
 
     public InputController controller;
     public int numAirJumps = 0;

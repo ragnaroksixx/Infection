@@ -30,6 +30,7 @@ public class CorruptAttack : Attack
     {
         if (PlayerInputController.instance.IsCorrupting) return;
         if (!(target is ICorruptable)) return;
+        if (!(target as ICorruptable).CanCorrupt()) return;
         if (state == AttackState.StartUP && !didHitTarget)
         {
             target.HitCharacter(Vector3.one * 0.001f, comboTime, 0, 0);

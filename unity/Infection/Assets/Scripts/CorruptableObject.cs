@@ -7,6 +7,7 @@ public class CorruptableObject : Movement, ICorruptable, IGrabable
 {
     public Explosion explosionPrefab;
     public GameObject effects;
+    public ObstructionHandler oHandler;
     public override void Die(bool ignoreSpawn)
     {
         if (PlayerInputController.instance.CorruptingEnemy == this)
@@ -32,6 +33,14 @@ public class CorruptableObject : Movement, ICorruptable, IGrabable
     public bool CanGrab()
     {
         return Health.currentHP <= 2;
+    }
+    public bool CanCorrupt()
+    {
+        return CanGrab();
+    }
+    public bool CanRelease()
+    {
+        return !oHandler.IsBlocked();
     }
     public override void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime, int damage)
     {

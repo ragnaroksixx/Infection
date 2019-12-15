@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3870920645660493643}
   - component: {fileID: 1405467743751397912}
   m_Layer: 16
-  m_Name: GameObject
+  m_Name: Obstruction Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   size: {x: 1, y: 1, z: 1}
   layer:
     serializedVersion: 2
-    m_Bits: 98305
+    m_Bits: 98561
 --- !u!65 &1405467743751397912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5494,6 +5494,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 2025616576784932609, guid: 9b1d2124ca369924e86a608c084e0e7f,
     type: 3}
   effects: {fileID: 3973209781314582696}
+  oHandler: {fileID: 3870920645660493643}
   cols:
   - {fileID: 8653612027531276992}
   - {fileID: 8653612028295444286}

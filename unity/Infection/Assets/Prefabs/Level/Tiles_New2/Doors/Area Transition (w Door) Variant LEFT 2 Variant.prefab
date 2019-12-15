@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: lockedDoorMesh
       value: 
       objectReference: {fileID: 2058739433527497704}
+    - target: {fileID: 6793843075813671030, guid: 2a7c62c514733c141b73d9bddc11748a,
+        type: 3}
+      propertyPath: open
+      value: 
+      objectReference: {fileID: 8300000, guid: 63db94a5683f9ce469f2ace32a0c0a05, type: 3}
     - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
       propertyPath: m_LocalPosition.x

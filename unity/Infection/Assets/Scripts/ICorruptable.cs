@@ -7,5 +7,7 @@ using System.Threading.Tasks;
 
 interface ICorruptable
 {
+    bool CanCorrupt();
+    bool CanRelease();
 }
 

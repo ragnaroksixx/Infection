@@ -10,6 +10,7 @@ public class PlayerInputController : InputController
     public static PlayerInputController instance;
     Movement corruptingEnemy = null;
     Movement holdingEnemy = null;
+    public AudioClip cantReleaseSFX;
     public void Awake()
     {
         instance = this;
@@ -70,7 +71,7 @@ public class PlayerInputController : InputController
 
     public bool IsCorrupting { get => corruptingEnemy != null; }
     public bool IsHoldingObject { get => holdingEnemy != null; }
-    public Movement CorruptingEnemy { get => corruptingEnemy; set => corruptingEnemy = value; }
+    public CorruptableObject CorruptingEnemy { get => corruptingEnemy as CorruptableObject; set => corruptingEnemy = value; }
     public Movement HoldingObject { get => holdingEnemy; set => holdingEnemy = value; }
 
     public override void Update()
@@ -80,8 +81,19 @@ public class PlayerInputController : InputController
         {
             if (!canRelease && originalPlayer.corruptAttack.KeyDown())
             {
-                canRelease = true;
-                absorbTimeTrack = 0;
+                if (!CorruptingEnemy.CanRelease())
+                {
+                    if (CorruptingEnemy.Flasher)
+                    {
+                        CorruptingEnemy.Flasher.Flash(0.5f);
+                        AudioManager.Play(cantReleaseSFX, transform.position);
+                    }
+                }
+                else
+                {
+                    canRelease = true;
+                    absorbTimeTrack = 0;
+                }
             }
             if (canRelease)
             {

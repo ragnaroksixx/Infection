@@ -1579,7 +1579,7 @@ MonoBehaviour:
   anim: {fileID: 6443565229929216958}
   fastFallMult: 8
   controller: {fileID: 8258637859583354217}
-  maxJumps: 2
+  numAirJumps: 0
   attacks: []
   maxHP: 3
   targetPriority: 0
@@ -1587,6 +1587,7 @@ MonoBehaviour:
   hitSFX: {fileID: 8300000, guid: 29af932066e487a4d8980bf9e9b58f66, type: 3}
   dieSFX: {fileID: 8300000, guid: a1ad79a68bd7f0e43ac3c0a00fd5528b, type: 3}
   ui: {fileID: 0}
+  isInvincible: 0
   meleeAttack: {fileID: 4226437564805666408}
   ariealAttack: {fileID: 4044692371334869374}
   clawAttack: {fileID: 8258637859632515162}
@@ -1626,6 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalPlayer: {fileID: 8258637859583354213}
+  cantReleaseSFX: {fileID: 8300000, guid: c786a7dc520c52f4381b077c8c992465, type: 3}
   absorbTime: 1
 --- !u!1 &8258637859632515164
 GameObject:
@@ -1705,9 +1707,6 @@ MonoBehaviour:
   throwRoot: {fileID: 4027950545616832500}
   grappleArmObject: {fileID: 4027950545616832500}
   throwSourcePoint: {fileID: 8258637859522505024}
-  pullStrength: 3
-  minPull: 10
-  maxPull: 15
 --- !u!1 &8258637859683849891
 GameObject:
   m_ObjectHideFlags: 0

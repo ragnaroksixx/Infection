@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     public KeyType keyType;
     public bool reSpawnOnDie;
     Coroutine co;
+    public ObstructionHandler oHandler;
     public virtual void Kill()
     {
         if (co != null)
@@ -27,6 +28,8 @@ public class Spawner : MonoBehaviour
     IEnumerator spawnInX()
     {
         yield return new WaitForSeconds(2);
+        while (oHandler.IsBlocked())
+            yield return null;
         Spawn(cacheRoom);
     }
     Room cacheRoom;
