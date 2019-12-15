@@ -164,8 +164,12 @@ public class ClawAttack : Attack
         //pullDir.x = Mathf.Sign(pullDir.x) * Mathf.Clamp(Mathf.Abs(pullDir.x), minPull, maxPull);
         //pullDir.y = Mathf.Sign(pullDir.y) * Mathf.Clamp(Mathf.Abs(pullDir.y), minPull, maxPull);
         PullOverride po = target.GetComponent<PullOverride>();
-        //if (po)
-        //    pullDir = po.dir;
+        if (po)
+        {
+            pullDir.x *= po.dampener.x;
+            pullDir.y *= po.dampener.y;
+            pullDir.z *= po.dampener.z;
+        }
         self.HitCharacter(pullDir, pullDuration, 0, 0);
     }
     public override void EndAttack()
