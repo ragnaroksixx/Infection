@@ -44,6 +44,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: deco_spikes_glow Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 683983686062448938, guid: 0126220144f7c214fbd0fe90457f3ff5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4550507341140513593, guid: 0126220144f7c214fbd0fe90457f3ff5,
         type: 3}
       propertyPath: m_LocalPosition.x
