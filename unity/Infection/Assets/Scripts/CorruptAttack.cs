@@ -8,6 +8,10 @@ public class CorruptAttack : Attack
 
     public InputController playerController;
     bool didHitTarget = false;
+    private void Awake()
+    {
+        SaveLoad.UpdateCollectibles();
+    }
     protected override void OnTriggerEnter(Collider other)
     {
         Door d = other.attachedRigidbody.GetComponent<Door>();
@@ -83,7 +87,7 @@ public class CorruptAttack : Attack
 
     public override bool CanAttack()
     {
-        return base.CanAttack() && !PlayerInputController.instance.IsHoldingObject;
+        return base.CanAttack() && !PlayerInputController.instance.IsHoldingObject && SaveLoad.hasCorruptAbility;
     }
 }
 

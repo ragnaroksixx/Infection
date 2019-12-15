@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
     public Spawner Spawn { get => spawn; set => spawn = value; }
 
     public InputController controller;
-    public int maxJumps = 1;
+    public int numAirJumps = 0;
     int jumpTrack = 0;
     [HideInInspector]
     public Attack[] attacks;
@@ -79,7 +79,7 @@ public class Movement : MonoBehaviour
     }
     public virtual void Start()
     {
-        jumpTrack = maxJumps;
+        jumpTrack = numAirJumps;
         //anim = GetComponent<Animator>();
     }
     public virtual void Update()
@@ -187,7 +187,7 @@ public class Movement : MonoBehaviour
 
     public virtual bool ShouldJump()
     {
-        bool canJump = jumpTrack > 0 || Time.time < coyoteTimeTrack;
+        bool canJump = (jumpTrack > 0 || isGrounded) || Time.time < coyoteTimeTrack;
         canJump = canJump && !isSimulated;
         canJump = canJump && (controller && controller.Jump(this));
         canJump = canJump && !IsAttacking() && !isRecoiling;
@@ -206,7 +206,7 @@ public class Movement : MonoBehaviour
     {
         coyoteTimeTrack = Time.time + coyoteTime;
         fastFall = false;
-        jumpTrack = maxJumps;
+        jumpTrack = numAirJumps;
     }
 
     public void SetVelocity(Vector2 i, float spd, bool ignoreY)
@@ -243,7 +243,8 @@ public class Movement : MonoBehaviour
         jumpHoldTimeTrack = jumpHoldTime;
         rBody.velocity = new Vector2(rBody.velocity.x, 0);
         rBody.velocity += Vector3.up * jumpSpeed;
-        jumpTrack--;
+        if (!isGrounded)
+            jumpTrack--;
         if (anim)
             anim.SetTrigger("jump");
         AudioManager.Play(jumpSFX, transform.position);

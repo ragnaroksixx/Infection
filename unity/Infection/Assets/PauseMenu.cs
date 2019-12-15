@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
+            if (CollectibleMenu.instance.isOpen) return;
             TooglePause();
         }
     }

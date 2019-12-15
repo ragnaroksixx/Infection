@@ -29,6 +29,10 @@ public class ClawAttack : Attack
     Transform grappleArmParentCache;
 
     public Transform throwSourcePoint;
+    private void Awake()
+    {
+        SaveLoad.UpdateCollectibles();
+    }
     public override void Start()
     {
         clawToTargetDuration = startUpLag;
@@ -54,11 +58,15 @@ public class ClawAttack : Attack
             {
                 Grab(target);
             }
-            else
+            else if (SaveLoad.hasClaw)
             {
                 target = AutoTarget(range);
                 AudioManager.Play(sfx, self.transform.position);
                 base.StartAttack();
+            }
+            else
+            {
+                InterruptAttack();
             }
         }
     }
@@ -279,9 +287,8 @@ public class ClawAttack : Attack
     }
     public override bool CanAttack()
     {
-        return base.CanAttack();// && !PlayerInputController.instance.IsHoldingObject;
+        return base.CanAttack() && SaveLoad.hasGrab;
     }
-
     public bool CanPullObject(Movement m)
     {
         return m.RBody.mass < self.RBody.mass;

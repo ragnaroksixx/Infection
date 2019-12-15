@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
+
 public static class SaveLoad
 {
     public static int spawnRoom = 0;
+
+    public static bool hasGrab { get; set; }
+    public static bool hasClaw { get; set; }
+    public static bool hasCorruptAbility { get; set; }
 
     static SaveLoad()
     {
@@ -12,8 +18,8 @@ public static class SaveLoad
     public static void Load()
     {
         PlayerPrefs.DeleteAll();
-        spawnRoom = PlayerPrefs.GetInt("spawnRoom", 0);
-        spawnRoom = 99;
+        spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
+        spawnRoom = 1;
     }
     public static void Save(Room r)
     {
@@ -37,7 +43,14 @@ public static class SaveLoad
     {
         PlayerPrefs.SetInt(c.idTag, 0);
         PlayerPrefs.Save();
+        UpdateCollectibles();
     }
+
+    public static int NumAirJumps()
+    {
+        return PlayerPrefs.HasKey("double jump") ? 1 : 0;
+    }
+
     public static bool HasCollectible(string c)
     {
         return PlayerPrefs.HasKey(c);
@@ -49,5 +62,13 @@ public static class SaveLoad
     public static void IncreaseMaxHP()
     {
         PlayerPrefs.SetInt("hp", GetMaxHP() + 1);
+    }
+    public static void UpdateCollectibles()
+    {
+        hasGrab = HasCollectible("grab");
+        hasClaw = HasCollectible("claw");
+        hasCorruptAbility = HasCollectible("corrupt");
+        if (PlayerMovement.instance)
+            PlayerMovement.instance.numAirJumps = SaveLoad.NumAirJumps();
     }
 }
