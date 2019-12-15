@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3740160079400561350, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
       propertyPath: m_Name
-      value: Area Transition (w Door) Variant LEFT 2
+      value: Area Transition (w Door) Variant LEFT 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3740160079400561351, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6793843075813671030, guid: 2a7c62c514733c141b73d9bddc11748a,
+        type: 3}
+      propertyPath: lockedDoorMesh
+      value: 
+      objectReference: {fileID: 2058739433527497704}
     - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -79,3 +84,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a7c62c514733c141b73d9bddc11748a, type: 3}
+--- !u!23 &2058739433527497704 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3892904552108063110, guid: 2a7c62c514733c141b73d9bddc11748a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3068214186356517486}
+  m_PrefabAsset: {fileID: 0}

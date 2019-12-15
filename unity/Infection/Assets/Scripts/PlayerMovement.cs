@@ -78,8 +78,14 @@ public class PlayerMovement : Movement
     }
     public override void Die(bool ignoreSpawn)
     {
-        SaveLoad.ReloadScene();
+        GameObject g = new GameObject();
+        g.AddComponent<CoRunner>().StartCoroutine(DeathSequence());
         base.Die(ignoreSpawn);
+    }
+    IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SaveLoad.ReloadScene();
     }
     public void UseSeperateArm(bool hArm)
     {

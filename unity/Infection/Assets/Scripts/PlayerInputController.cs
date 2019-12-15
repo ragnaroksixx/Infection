@@ -91,12 +91,13 @@ public class PlayerInputController : InputController
                     if (absorbTimeTrack < absorbTime)
                     {
                         corruptingEnemy.SetController(null);
-                        corruptingEnemy.HitCharacter(Vector3.up * 5, .2f, 5, 0);
+                        corruptingEnemy.HitCharacter(Vector3.up * 5, .2f, 3, 0);
                     }
                     else
                     {
                         corruptingEnemy.Die();
                         originalPlayer.Health.GainHP(1);
+                        UIHacks.Instance.player.UpdateUI(originalPlayer.Health);
                     }
                     ReleasCorruption();
                 }
@@ -109,7 +110,11 @@ public class PlayerInputController : InputController
     }
     public void ReleasCorruption()
     {
-        corruptingEnemy.ui = null;
+        if (corruptingEnemy)
+        {
+            corruptingEnemy.ui = null;
+            corruptingEnemy.SetController(corruptingEnemy.GetComponent<InputController>());
+        }
         corruptingEnemy = null;
         originalPlayer.SetController(this);
         UIHacks.Instance.SetCorruptable(false);
@@ -121,5 +126,6 @@ public class PlayerInputController : InputController
         corruptingEnemy.ui = UIHacks.Instance.corrupt;
         UIHacks.Instance.corrupt.UpdateUI(corruptingEnemy.Health);
         UIHacks.Instance.SetCorruptable(true);
+        Door.CloseAllDoors();
     }
 }

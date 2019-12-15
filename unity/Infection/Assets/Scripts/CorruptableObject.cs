@@ -31,7 +31,7 @@ public class CorruptableObject : Movement, ICorruptable, IGrabable
     }
     public bool CanGrab()
     {
-        return Health.currentHP <= 1;
+        return Health.currentHP <= 2;
     }
     public override void HitCharacter(Vector3 dir, float stunTime, float zeroVelocityTime, int damage)
     {
@@ -48,5 +48,10 @@ public class CorruptableObject : Movement, ICorruptable, IGrabable
             Die(false);
         }
     }
+}
+
+public class CoRunner : MonoBehaviour
+{
+
 }
 

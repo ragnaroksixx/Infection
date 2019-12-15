@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
         if (co != null)
             StopCoroutine(co);
         if (instance)
-            instance.Die();
+            instance.Die(true);
     }
     public void OnDieCallback()
     {
@@ -32,6 +32,8 @@ public class Spawner : MonoBehaviour
     Room cacheRoom;
     public virtual GameObject Spawn(Room r)
     {
+        if (instance)
+            instance.Die(true);
         cacheRoom = r;
         GameObject obj;
         obj = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);

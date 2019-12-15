@@ -32,6 +32,20 @@ public class EnemyHitbox : MonoBehaviour
         {
             m.HitCharacter(dir * recoilSpeed, recoilTime, zeroRecoilTime, damageTemp);
         }
+        Patrol patrol = self.GetComponent<Patrol>();
+        if (patrol)
+        {
+            bool isPlayerInFront;
+            if (self.isFacingRight)
+                isPlayerInFront = m.transform.position.x > self.transform.position.x;
+            else
+                isPlayerInFront = m.transform.position.x < self.transform.position.x;
+
+            if (isPlayerInFront)
+            {
+                self.FaceDirection(!self.isFacingRight);
+            }
+        }
 
     }
 }

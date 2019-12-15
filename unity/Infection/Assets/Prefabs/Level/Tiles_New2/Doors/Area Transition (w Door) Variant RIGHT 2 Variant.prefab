@@ -67,16 +67,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.24482219
-      objectReference: {fileID: 0}
-    - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.5059667
-      objectReference: {fileID: 0}
     - target: {fileID: 7526243016726528303, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -96,6 +86,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.694
+      objectReference: {fileID: 0}
+    - target: {fileID: 6793843075813671030, guid: 2a7c62c514733c141b73d9bddc11748a,
+        type: 3}
+      propertyPath: lockedDoorMesh
+      value: 
+      objectReference: {fileID: 3505244107867395290}
+    - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.24482219
+      objectReference: {fileID: 0}
+    - target: {fileID: 453671209784494157, guid: 2a7c62c514733c141b73d9bddc11748a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.5059667
       objectReference: {fileID: 0}
     - target: {fileID: 478968175313859198, guid: 2a7c62c514733c141b73d9bddc11748a,
         type: 3}
@@ -129,3 +134,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a7c62c514733c141b73d9bddc11748a, type: 3}
+--- !u!23 &3505244107867395290 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3892904552108063110, guid: 2a7c62c514733c141b73d9bddc11748a,
+    type: 3}
+  m_PrefabInstance: {fileID: 478297321626496348}
+  m_PrefabAsset: {fileID: 0}

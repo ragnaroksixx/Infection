@@ -18,6 +18,7 @@ public class Door : MonoBehaviour
     public KeyType keyType;
     CinemachineVirtualCamera vCam;
     public AudioClip open, locked;
+    public MeshRenderer lockedDoorMesh;
     private void Awake()
     {
         allDoors.Add(this);
@@ -27,6 +28,10 @@ public class Door : MonoBehaviour
         if (isLocked && SaveLoad.IsUnLocked(this))
         {
             lockId = -1;
+        }
+        else if (isLocked)
+        {
+            lockedDoorMesh.material.SetColor("_EmissionColor", Color.red);
         }
     }
     public static void CloseAllDoors()
@@ -57,6 +62,7 @@ public class Door : MonoBehaviour
     {
         SaveLoad.UnlockDoor(this);
         lockId = -1;
+        lockedDoorMesh.material.SetColor("_EmissionColor", Color.white);
     }
 }
 
