@@ -314,7 +314,8 @@ public class Movement : MonoBehaviour
             spawn.OnDieCallback();
         }
         Destroy(this.gameObject);
-        AudioManager.Play(dieSFX, transform.position);
+        if (!ignoreSpawn)
+            AudioManager.Play(dieSFX, transform.position);
     }
     RigidbodyConstraints defaultConstraints;
     public void FreezeRBody()

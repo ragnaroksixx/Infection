@@ -10,8 +10,8 @@ public class StarterTips : MonoBehaviour
     {
         if (!isNewGame)
         {
-           // Destroy(this.gameObject);
-           //yield break;
+           Destroy(this.gameObject);
+           yield break;
         }
         ScreenFader.instance.image.color = Color.white;
         ScreenFader.FadeFromBlack(4f, 0, null);
