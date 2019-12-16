@@ -17,7 +17,7 @@ public class CollectibleMenu : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (isOpen && Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (isOpen && Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             SetVis(false, null);
         }

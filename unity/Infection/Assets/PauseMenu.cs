@@ -14,10 +14,14 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             if (CollectibleMenu.instance.isOpen) return;
             TooglePause();
+        }
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton6))
+        {
+            Restart();
         }
     }
 
@@ -26,5 +30,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
         pauseMenu.DOFade(isPaused ? 1 : 0, 0.5f).SetUpdate(true);
+    }
+
+    public void Restart()
+    {
+        SaveLoad.ReloadScene();
     }
 }

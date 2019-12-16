@@ -14,6 +14,7 @@ public class TileTracker : MonoBehaviour
     private void OnDestroy()
     {
         allTiles = new List<TileUI>();
+        currentTile = -1;
     }
     public static void SetTile(int i)
     {

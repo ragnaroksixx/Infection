@@ -5341,10 +5341,10 @@ SphereCollider:
   m_GameObject: {fileID: 8653612027531276994}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.4
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!65 &8653612027531276999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5354,7 +5354,7 @@ BoxCollider:
   m_GameObject: {fileID: 8653612027531276994}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.90000004, y: 0.70783085, z: 1}
   m_Center: {x: 0, y: -0.14608459, z: 0}
