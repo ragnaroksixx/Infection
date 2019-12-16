@@ -8,13 +8,14 @@ using DG.Tweening;
 public class ScreenFader : MonoBehaviour
 {
     public Image image;
-    static ScreenFader instance;
+    public static ScreenFader instance;
     private void Awake()
     {
         instance = this;
     }
     public static void FadeToBlack(float duration, Action onComplete)
     {
+        instance.image.color = Color.black;
         instance.image.DOFade(1, duration).OnComplete(() =>
          {
              onComplete?.Invoke();

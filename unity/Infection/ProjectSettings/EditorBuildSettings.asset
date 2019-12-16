@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Ralf_Title.unity
     guid: c27cc3fda3b162a45a5d14b614621c93
   - enabled: 1
-    path: Assets/Scenes/Level_01.unity
-    guid: fb279d2bbf6c7c94098c696abf9dd44d
+    path: Assets/Scenes/ralf_intro.unity
+    guid: 14cce74a314879940ac3e3262068a113
+  - enabled: 1
+    path: Assets/Scenes/Level_03_ralf.unity
+    guid: d3dde1f5bab59b04a89da88d0074a295
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f2207f7a53016b44f9c2ef989ab09b32,
       type: 2}

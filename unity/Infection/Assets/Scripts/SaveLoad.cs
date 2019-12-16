@@ -18,7 +18,7 @@ public static class SaveLoad
     public static void Load()
     {
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        spawnRoom = 51;
+        //spawnRoom = 3;
     }
     public static void Save(Room r)
     {
@@ -63,7 +63,7 @@ public static class SaveLoad
     {
         PlayerPrefs.SetInt("hp", GetMaxHP() + 1);
     }
-    static bool hasAll = true;
+    static bool hasAll = false;
     public static void UpdateCollectibles()
     {
         hasGrab = HasCollectible("grab") || hasAll;
@@ -75,6 +75,7 @@ public static class SaveLoad
 
     public static void NewGame()
     {
+        StarterTips.isNewGame = true;
         PlayerPrefs.DeleteAll();
         Load();
         UpdateCollectibles();
@@ -83,7 +84,7 @@ public static class SaveLoad
 
     public static void Continue()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public static void MainMenu()
     {

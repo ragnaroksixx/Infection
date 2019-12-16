@@ -13,7 +13,7 @@ public class Room : MonoBehaviour
     protected Spawner[] spawners;
     protected CleanPoints points;
     public AudioClip overrideBGM;
-
+    public bool setSpawnOnEntry;
     public Transform SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
     public virtual void Start()
@@ -67,6 +67,8 @@ public class Room : MonoBehaviour
         vCam.Priority = focusPriority;
         AudioManager.SetBgm(overrideBGM);
         playerRoom = this;
+        if (setSpawnOnEntry)
+            SaveLoad.Save(this);
 
     }
 
