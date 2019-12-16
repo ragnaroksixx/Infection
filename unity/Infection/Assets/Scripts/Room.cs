@@ -38,11 +38,6 @@ public class Room : MonoBehaviour
         {
             Enter();
             PlayerMovement.instance.transform.position = spawnPoint.transform.position;
-            foreach (Spawner spawner in spawners)
-            {
-                if (spawner.killOnPlayerStart)
-                    spawner.Kill();
-            }
             Cleaner.instance.Stop();
         }
         else

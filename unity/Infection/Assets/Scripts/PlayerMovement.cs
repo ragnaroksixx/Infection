@@ -16,6 +16,8 @@ public class PlayerMovement : Movement
     public Mesh wArm, woArm;
     public SkinnedMeshRenderer skinnedMesh;
     public GameObject holdArm, grabArm;
+    public ParticleSystem spawnEffect;
+    public Transform graphicForSpawn;
     public override void SetController(InputController ic)
     {
         base.SetController(ic);
@@ -41,10 +43,20 @@ public class PlayerMovement : Movement
         UseAttachedArm();
         SetAttacks(meleeAttack, ariealAttack, clawAttack, corruptAttack);
     }
-    public override void Update()
+    public override void Start()
     {
-        base.Update();
-
+        base.Start();
+        StartCoroutine(StartEffect());
+    }
+    public IEnumerator StartEffect()
+    {
+        graphicForSpawn.gameObject.SetActive(false);
+        spawnEffect.Play(true);
+        SimulateInput(Vector3.zero);
+        yield return new WaitForSeconds(1);
+        StopSimulateInput();
+        graphicForSpawn.gameObject.SetActive(true);
+        spawnEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); ;
     }
     public override void FixedUpdate()
     {

@@ -276,7 +276,7 @@ public class ClawAttack : Attack
     {
         Drop();
         m.UnFreezeRBody();
-        Vector3 throwVelocity = new Vector3(9, 9);
+        Vector3 throwVelocity = new Vector3(14, 6);
         if (!self.isFacingRight)
             throwVelocity.x *= -1;
         m.transform.SetParent(null);

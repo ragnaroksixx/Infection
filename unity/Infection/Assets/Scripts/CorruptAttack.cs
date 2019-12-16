@@ -71,6 +71,10 @@ public class CorruptAttack : Attack
             self.anim.SetBool("attackDone", false);
             self.anim.SetTrigger(attackTrigger);
         }
+        if (particles)
+        {
+            particles.Play(true);
+        }
     }
     public override void OnAttackStartUp()
     {

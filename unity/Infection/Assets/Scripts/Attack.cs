@@ -39,6 +39,7 @@ public class Attack : MonoBehaviour
     }
     public string attackTrigger;
     public AudioClip sfx;
+    public ParticleSystem particles;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -47,6 +48,10 @@ public class Attack : MonoBehaviour
         comboTime += startUpLag + attackDuration + endLag;
         self = GetComponentInParent<Movement>();
         SetHitBox(false);
+        if (particles)
+        {
+            particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
 
     // Update is called once per frame
@@ -69,6 +74,10 @@ public class Attack : MonoBehaviour
             self.anim.SetBool("skip", false);
             self.anim.SetTrigger(attackTrigger);
         }
+        if (particles)
+        {
+            particles.Play(true);
+        }
     }
     public virtual void EndAttack()
     {
@@ -80,6 +89,10 @@ public class Attack : MonoBehaviour
                 self.anim.SetBool("attackDone", true);
         }
         doNextCombo = false;
+        if (particles)
+        {
+            particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
     float time = 0;
     protected float timeAddition = 0;

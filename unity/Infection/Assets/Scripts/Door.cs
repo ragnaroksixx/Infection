@@ -31,14 +31,15 @@ public class Door : MonoBehaviour
         }
         else if (isLocked)
         {
-            lockedDoorMesh.material.SetColor("_EmissionColor", Color.red);
+            lockedDoorMesh.material.SetColor("_EmissionColor", Color.red * 44.2f);
         }
     }
     public static void CloseAllDoors()
     {
         foreach (Door d in allDoors)
         {
-            d.Close();
+            if (d)
+                d.Close();
         }
     }
     public void Open(bool ignoreLock = false)
@@ -63,6 +64,10 @@ public class Door : MonoBehaviour
         SaveLoad.UnlockDoor(this);
         lockId = -1;
         lockedDoorMesh.material.SetColor("_EmissionColor", Color.white);
+    }
+    private void OnDestroy()
+    {
+        allDoors = new List<Door>();
     }
 }
 
