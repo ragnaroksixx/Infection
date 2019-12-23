@@ -26,7 +26,7 @@ public class BossPhaseController : MonoBehaviour
     public int numPhases = 4;
     public GameObject[] grapplePoints;
     public Transform shieldGraphic;
-
+    public float startOverDelay = 3;
     private void Start()
     {
         foreach (Spawner item in spawners)
@@ -113,13 +113,17 @@ public class BossPhaseController : MonoBehaviour
                 shieldGraphic.DOLocalMove(new Vector3(0, 0, -.5f), 0.5f);
                 break;
             case Phase.DEAD:
+                SaveLoad.MainMenu(startOverDelay);
                 break;
             default:
                 break;
         }
         phaseStartTime = Time.time;
     }
-
+    private void OnDestroy()
+    {
+        SaveLoad.MainMenu(startOverDelay);
+    }
     public void ExitPhase(Phase p)
     {
         switch (p)

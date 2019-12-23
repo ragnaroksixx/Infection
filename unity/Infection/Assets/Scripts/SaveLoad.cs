@@ -18,7 +18,7 @@ public static class SaveLoad
     public static void Load()
     {
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        //spawnRoom = 3;
+        //spawnRoom = 99;
     }
     public static void Save(Room r)
     {
@@ -86,8 +86,16 @@ public static class SaveLoad
     {
         SceneManager.LoadScene(2);
     }
-    public static void MainMenu()
+    public static void MainMenu(float delay)
     {
+        GameObject g = new GameObject();
+        g.AddComponent<CoRunner>().StartCoroutine(
+            MainMenuInX(delay));
+    }
+
+    public static IEnumerator MainMenuInX(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(0);
     }
 }
