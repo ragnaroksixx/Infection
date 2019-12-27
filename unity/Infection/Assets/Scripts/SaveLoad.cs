@@ -18,7 +18,7 @@ public static class SaveLoad
     public static void Load()
     {
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        //spawnRoom = 99;
+        //spawnRoom = 1;
     }
     public static void Save(Room r)
     {

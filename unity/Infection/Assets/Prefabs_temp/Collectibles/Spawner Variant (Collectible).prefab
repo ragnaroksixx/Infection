@@ -17,7 +17,10 @@ MonoBehaviour:
   killOnPlayerStart: 0
   keyType: 0
   reSpawnOnDie: 0
+  oHandler: {fileID: 0}
   t: 
+  sprite: {fileID: 0}
+  collectibleUI: {fileID: 0}
 --- !u!1001 &7298674886024498521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,10 +28,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8013123978027522189, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+    - target: {fileID: 4231352683361578985, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
         type: 3}
-      propertyPath: m_Name
-      value: Spawner Variant (Collectible)
+      propertyPath: m_LocalScale.y
+      value: 1.8731095
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231352683361578985, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013123977882376707, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8013123978027522188, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
         type: 3}
@@ -83,6 +96,21 @@ PrefabInstance:
     - target: {fileID: 8013123978027522188, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013123978027522189, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+        type: 3}
+      propertyPath: m_Name
+      value: Spawner Variant (Collectible)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752959724357971039, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752959724357971039, guid: 4e6533a6ffb74024a90ca0ed7e6d2b98,
+        type: 3}
+      propertyPath: m_Size.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
