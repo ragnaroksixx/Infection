@@ -122,7 +122,8 @@ public class BossPhaseController : MonoBehaviour
     }
     private void OnDestroy()
     {
-        SaveLoad.MainMenu(startOverDelay);
+        if (boss.Health.currentHP <= 0)
+            SaveLoad.MainMenu(startOverDelay);
     }
     public void ExitPhase(Phase p)
     {
