@@ -108,7 +108,7 @@ public class BossPhaseController : MonoBehaviour
                     g.SetActive(false);
                 }
                 shieldInstance = GameObject.Instantiate(shieldPrefab, transform.position, Quaternion.identity);
-                shieldInstance.Init(new Vector3(15, 6, 3));
+                shieldInstance.Init(new Vector3(12, 10, 3));
                 boss.isInvincible = true;
                 shieldGraphic.DOLocalMove(new Vector3(0, 0, -.5f), 0.5f);
                 break;

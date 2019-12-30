@@ -18,7 +18,7 @@ public static class SaveLoad
     public static void Load()
     {
         spawnRoom = PlayerPrefs.GetInt("spawnRoom", 1);
-        //spawnRoom = 1;
+        //spawnRoom = 5;
     }
     public static void Save(Room r)
     {
@@ -61,7 +61,7 @@ public static class SaveLoad
     }
     public static void IncreaseMaxHP()
     {
-        PlayerPrefs.SetInt("hp", GetMaxHP() + 1);
+        PlayerPrefs.SetInt("hp", GetMaxHP() + 1  );
     }
     static bool hasAll = false;
     public static void UpdateCollectibles()

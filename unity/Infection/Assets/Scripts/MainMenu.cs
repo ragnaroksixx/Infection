@@ -11,10 +11,10 @@ public class MainMenu : MonoBehaviour
         {
             NewGame();
         }
-        else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
-        {
-            Continue();
-        }
+        //else if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
+        //{
+        //    Continue();
+        //}
     }
 
     public void NewGame()
